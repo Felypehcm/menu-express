@@ -24,7 +24,7 @@ const Login = ({navigation}: any) => {
             <Text onPress={() => {goTopage("createAccount")}} style={styles.link}>Create Accout</Text>
             <Text onPress={() => {goTopage("forgotPassword")}} style={styles.link}>Forgot Password</Text>
           </View>
-          <Button onPress={() => {goTopage("home")}} title="Enviar"></Button>
+          <Button onPress={() => {goTopage("Home")}} title="Enviar"></Button>
         </View>
       </ImageBackground>
     </View>
