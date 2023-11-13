@@ -36,10 +36,9 @@ const App = (): JSX.Element => {
           }
         </Stack.Screen>
         <Stack.Screen name="ShoppingCart" component={ShoppingCart}></Stack.Screen>
-        <Stack.Screen name="Favorites" >
+        <Stack.Screen name="Favorites">
         {
-            () => (
-          <Favorites favorites={favorites} setFavorites={setFavorites}></Favorites>)
+            () => (<Favorites favorites={favorites} setFavorites={setFavorites}></Favorites>)
         }
         </Stack.Screen>
       </Stack.Navigator>
