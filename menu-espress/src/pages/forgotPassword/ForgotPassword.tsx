@@ -6,6 +6,9 @@ import styles from '../login/LoginStyle'
 const imgbg='./bg.png'
 
 const ForgotPassword = ({navigation}: any) => {
+  const goTopage = (path: string) => {
+    navigation.navigate(path)
+  }
   return (
     <View style={styles.container}>
       <ImageBackground source={(require(imgbg))} style={styles.imgbg}>
@@ -17,7 +20,7 @@ const ForgotPassword = ({navigation}: any) => {
         <TextInput style={styles.input} />
         <Text style={styles.text}>Confirme seu email</Text>
         <TextInput style={styles.input} />
-        <Button title="Enviar" ></Button>
+        <Button onPress={() => {goTopage("Login")}} title="Enviar"></Button>
         </View>
       </ImageBackground>
     </View>

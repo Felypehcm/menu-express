@@ -8,6 +8,8 @@ import ForgotPassword from './src/pages/forgotPassword/ForgotPassword';
 import ShoppingCart from './src/pages/shoppingCart/ShoppingCart';
 import { useState } from 'react';
 import Favorites from './src/pages/favorites/Favorites';
+import Login from './src/pages/login/Login';
+import { Header } from 'react-native-elements';
 
 
 const App = (): JSX.Element => {
@@ -17,9 +19,10 @@ const App = (): JSX.Element => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen options={{headerShown: false}} name="Login" component={Login} ></Stack.Screen>
         <Stack.Screen  options={{headerShown: false}} name="login" component={login}></Stack.Screen>
-        <Stack.Screen options={{title: 'Criar Usuario', headerTintColor: '#000'}} name="createAccount" component={CreateAccount}></Stack.Screen>
-        <Stack.Screen options={{title: 'Recuperar Senha', headerTintColor: '#000'}} name="forgotPassword" component={ForgotPassword}></Stack.Screen>
+        <Stack.Screen  options={{title: 'Criar Usuario', headerTintColor: '#000', headerShown: false}} name="createAccount" component={CreateAccount}></Stack.Screen>
+        <Stack.Screen options={{title: 'Recuperar Senha', headerTintColor: '#000', headerShown: false}} name="forgotPassword" component={ForgotPassword}></Stack.Screen>
         <Stack.Screen options={({navigation}) => {
           return {
             title: 'Lanches',
@@ -36,7 +39,7 @@ const App = (): JSX.Element => {
           }
         </Stack.Screen>
         <Stack.Screen name="ShoppingCart" component={ShoppingCart}></Stack.Screen>
-        <Stack.Screen name="Favorites">
+        <Stack.Screen name="Favorites" options={{headerShown: false}}>
         {
             () => (<Favorites favorites={favorites} setFavorites={setFavorites}></Favorites>)
         }

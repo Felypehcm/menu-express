@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     logo: {
         alignItems: 'center',
         marginBottom: '10%',
-        width: 300,
+        width: 320,
     },
 
 
