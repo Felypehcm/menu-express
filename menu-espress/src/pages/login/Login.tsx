@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Text, TextInput, View, Image, ImageBackground } from 'react-native'
+import { Button, Text, TextInput, View, Image, ImageBackground, KeyboardAvoidingView, ScrollView, Platform } from 'react-native'
 import  Icon  from 'react-native-vector-icons/MaterialIcons';
 import styles from './LoginStyle'
 
@@ -11,6 +11,11 @@ const Login = ({navigation}: any) => {
     navigation.navigate(path)
   }
   return (
+    <KeyboardAvoidingView
+    behavior={Platform.OS == "ios" ? "padding" : 'height'}
+    keyboardVerticalOffset={10}
+    style={styles.container}>
+      <ScrollView style={{width: "100%"}}>
     <View style={styles.container}>
       <ImageBackground source={(require(imgbg))} style={styles.imgbg}>
         <View style={styles.box}>
@@ -42,6 +47,8 @@ const Login = ({navigation}: any) => {
         </View>
       </ImageBackground>
     </View>
+    </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 

@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { Button, TextInput, View, Image, ImageBackground } from 'react-native';
+import { Button, TextInput, View, Image, ImageBackground, Platform, ScrollView } from 'react-native';
 import { Text } from 'react-native'
 import  Icon  from 'react-native-vector-icons/MaterialIcons';
 import styles from '../createAccount/CreateAccountStyle'
 import { CheckBox } from 'react-native-elements';
+import { KeyboardAvoidingView } from 'react-native';
 
 const imgbg='./bg.png'
 
@@ -17,7 +18,11 @@ const CreateAccount = ({navigation}: any) => {
   const[isSelected, setSelected] = useState(false)
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+    behavior={Platform.OS == "ios" ? "padding" : 'height'}
+    keyboardVerticalOffset={10}
+    style={styles.container}>
+      <ScrollView style={{width: "100%"}}>
       <ImageBackground source={(require(imgbg))} style={styles.imgbg}>
         <View style={styles.box}>
           <View style={styles.logo}>
@@ -60,7 +65,8 @@ const CreateAccount = ({navigation}: any) => {
           <Button onPress={() => {goTopage("Login")}} title="Cadastrar"></Button>
           </View>
       </ImageBackground>
-    </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 

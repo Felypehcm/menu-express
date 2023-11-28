@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Text, TextInput, View, Image, ImageBackground } from 'react-native'
+import { Button, Text, TextInput, View, Image, ImageBackground, ScrollView, KeyboardAvoidingView, Platform } from 'react-native'
 import  Icon  from 'react-native-vector-icons/MaterialIcons';
 import styles from '../login/LoginStyle'
 
@@ -10,6 +10,11 @@ const ForgotPassword = ({navigation}: any) => {
     navigation.navigate(path)
   }
   return (
+    <KeyboardAvoidingView
+    behavior={Platform.OS == "ios" ? "padding" : 'height'}
+    keyboardVerticalOffset={10}
+    style={styles.container}>
+      <ScrollView style={{width: "100%"}}>
     <View style={styles.container}>
       <ImageBackground source={(require(imgbg))} style={styles.imgbg}>
        <View style={styles.box}>
@@ -24,6 +29,8 @@ const ForgotPassword = ({navigation}: any) => {
         </View>
       </ImageBackground>
     </View>
+    </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 

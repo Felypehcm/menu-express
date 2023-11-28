@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     imgbg:{
       flex: 1,
       width: '100%',
+      paddingBottom: 200
     },
 
 
