@@ -22,9 +22,9 @@ const ForgotPassword = ({navigation}: any) => {
         <Image source={require('../tentativa6.png')}/>
         </View>
         <Text style={styles.text}>Digite seu email</Text>
-        <TextInput style={styles.input} />
+        <TextInput style={styles.input} returnKeyType="done"/>
         <Text style={styles.text}>Confirme seu email</Text>
-        <TextInput style={styles.input} />
+        <TextInput style={styles.input} returnKeyType="done"/>
         <Button onPress={() => {goTopage("Login")}} title="Enviar"></Button>
         </View>
       </ImageBackground>

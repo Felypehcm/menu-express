@@ -31,12 +31,14 @@ const CreateAccount = ({navigation}: any) => {
           <Text style={styles.text}>Digite seu nome completo</Text>
           <TextInput 
             style={styles.input}
-            placeholder='Nome' />
+            placeholder='Nome' 
+            returnKeyType="done" />
 
           <Text style={styles.text}>Digite seu email</Text>
           <TextInput 
             style={styles.input}
-            placeholder='Email' />
+            placeholder='Email' 
+            returnKeyType="done" />
 
           <Text style={styles.text}>Digite sua senha</Text>
           <TextInput 
