@@ -1,21 +1,69 @@
 import React from "react";
-import { Text, ScrollView } from "react-native"
+import { Text, ScrollView, Pressable, ToastAndroid, View } from "react-native"
 import { Card } from 'react-native-elements'
 
 const ShoppingCart = ({route}: any) => {
     const{shoppingCart} = route.params
+    const openToast = (message: string) => {
+        ToastAndroid.show(message, 3000)
+      }
     return (
         <ScrollView >
             {
-            shoppingCart.map((prod: any, i: number) => (
-
+            shoppingCart.map((prod: any, i: number, setShoppingCart: any) => (
                 <Card key={i}>
                     <Card.Title style={{fontSize: 22}}> {prod.name} </Card.Title>
                     <Card.Divider/>
                     <Card.Image source={{uri: prod.image}}/>
-                    <Text style={{fontSize: 16, marginEnd: "5%", marginBottom: "5%", marginTop: "3%"}}> Preço: {prod.price} </Text>
+                    <View style={{alignItems:'center'}}>
+                        <Text style={{fontSize: 16, margin: 8}}> Preço: {prod.price * prod.quantity} </Text>
+                        <Text style={{fontSize: 16, margin: 8}}> Quantidade: {prod.quantity} </Text>
+                    </View>
+                    <View style={{flexDirection:'row' ,alignItems: 'center', justifyContent: 'space-between'}}>
+                        <Pressable onPress={() => {
+                            openToast("Item removido com sucesso!")
+                            prod.quantity-=1;
+                            
+                            }}
+                            style={
+                            ({pressed}:any) => (
+                                {
+                                backgroundColor: pressed ? '#2089dc' : '#fb4e30',
+                                height: 40,
+                                width: '30%' ,
+                                display: "flex",
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                borderRadius: 6,
+                                marginBottom: 8
+                                }
+                            )
+                            }>
+                            <Text style={{fontSize: 24, color: 'white'}}>-</Text>
+                        </Pressable>
+                        <Text style={{fontSize: 32, color: 'black', marginBottom: 8}}>{prod.quantity}</Text>
+                        <Pressable onPress={() => {
+                            openToast("Item adicionado com sucesso!")
+                            prod.quantity+=1;
+                            
+                            }}
+                            style={
+                            ({pressed}:any) => (
+                                {
+                                backgroundColor: pressed ? '#2089dc' : '#fb4e30',
+                                height: 40,
+                                width: '30%' ,
+                                display: "flex",
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                borderRadius: 6
+                                }
+                            )
+                            }>
+                            <Text style={{fontSize: 24, color: 'white'}}>+</Text>
+                        </Pressable>
+                </View>
                 </Card>
-
         ))
         }
         </ScrollView>

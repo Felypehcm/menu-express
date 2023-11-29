@@ -5,15 +5,15 @@ import { Button, Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/AntDesign'
 
 const productsSanduiches = [
-  {name: "X Bacon", price: "R$ 32,00", description: "X Bacon", image: "https://embutidosbonatti.ind.br/temp/BIN_57_V9Fb0BwK.jpg"},
-  {name: "X Salad", price: "R$ 28,00", description: "X Salad", image: "https://d1etmlapode6io.cloudfront.net/images/fidelizze/demofood/items/rsz_ilya-mashkov-mkva2hljgni-unsplash_637260269992723902.jpg"},
-  {name: "X Egg", price: "R$ 28,00", description: "X Egg", image: "https://www.receiteria.com.br/wp-content/uploads/receitas-de-x-egg-4-730x449.jpg"},
-  {name: "X Calabresa", price: "R$ 28,00", description: "X Calabresa", image: "https://storage.googleapis.com/domain-images/bd77a99c-250c-464d-816b-e8f862fd1122/products/gallery_301e217e-7a0f-456a-9db5-fe871ace1f09.jpg"},
-  {name: "X Frango", price: "R$ 30,00", description: "X Frango", image: "https://looklanches.com.br/wp-content/uploads/2020/09/x-frango-tudo.jpg"},
-  {name: "Cachorro Quente", price: "R$ 15,00", description: "Cachorro Quente", image: "https://receitinhas.com.br/wp-content/uploads/2022/06/cachorro-quente-tradicional-2.jpg"},
-  {name: "Sanduiche de Mortadela", price: "R$ 30,00", description: "Sanduiche de Mortadela", image: "https://www.fmetropolitana.com.br/wp-content/uploads/2023/01/Brazuca-Marba-e-Mortadela-Brasil.jpg"},
-  {name: "Duplo Smash", price: "R$ 32,00", description: "Duplo Smash", image: "https://i.pinimg.com/736x/7d/55/ba/7d55ba09657e63902cc7e5afcf9a1e7a.jpg"},
-  {name: "Bauru", price: "R$ 34,00", description: "Bauru", image: "https://i0.statig.com.br/bancodeimagens/2r/5g/l7/2r5gl73lyxqlpxwoodysu86q5.jpg"}
+  {name: "X Bacon", price: 32, quantity: 0, description: "X Bacon", image: "https://embutidosbonatti.ind.br/temp/BIN_57_V9Fb0BwK.jpg"},
+  {name: "X Salad", price: "R$ 28,00", quantity: 0, description: "X Salad", image: "https://d1etmlapode6io.cloudfront.net/images/fidelizze/demofood/items/rsz_ilya-mashkov-mkva2hljgni-unsplash_637260269992723902.jpg"},
+  {name: "X Egg", price: "R$ 28,00", quantity: 0, description: "X Egg", image: "https://www.receiteria.com.br/wp-content/uploads/receitas-de-x-egg-4-730x449.jpg"},
+  {name: "X Calabresa", price: "R$ 28,00", quantity: 0, description: "X Calabresa", image: "https://storage.googleapis.com/domain-images/bd77a99c-250c-464d-816b-e8f862fd1122/products/gallery_301e217e-7a0f-456a-9db5-fe871ace1f09.jpg"},
+  {name: "X Frango", price: "R$ 30,00", quantity: 0, description: "X Frango", image: "https://looklanches.com.br/wp-content/uploads/2020/09/x-frango-tudo.jpg"},
+  {name: "Cachorro Quente", price: "R$ 15,00", quantity: 0, description: "Cachorro Quente", image: "https://receitinhas.com.br/wp-content/uploads/2022/06/cachorro-quente-tradicional-2.jpg"},
+  {name: "Sanduiche de Mortadela", price: "R$ 30,00", quantity: 0, description: "Sanduiche de Mortadela", image: "https://www.fmetropolitana.com.br/wp-content/uploads/2023/01/Brazuca-Marba-e-Mortadela-Brasil.jpg"},
+  {name: "Duplo Smash", price: "R$ 32,00", quantity: 0, description: "Duplo Smash", image: "https://i.pinimg.com/736x/7d/55/ba/7d55ba09657e63902cc7e5afcf9a1e7a.jpg"},
+  {name: "Bauru", price: "R$ 34,00", quantity: 0, description: "Bauru", image: "https://i0.statig.com.br/bancodeimagens/2r/5g/l7/2r5gl73lyxqlpxwoodysu86q5.jpg"}
 ]
 
 const productsCombos = [
@@ -68,6 +68,7 @@ const Home = ({shoppingCart, setShoppingCart, favorites, setFavorites}: any) => 
 
                 <Pressable onPress={() => {
                   openToast("Item adicionado com sucesso!")
+                  product.quantity+=1;
                   setShoppingCart([...shoppingCart, product])
                 }}
                 style={
