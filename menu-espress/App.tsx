@@ -10,6 +10,7 @@ import { useState } from 'react';
 import Favorites from './src/pages/favorites/Favorites';
 import Login from './src/pages/login/Login';
 import { Header } from 'react-native-elements';
+import Chat from './src/pages/Chat/chat';
 
 
 const App = (): JSX.Element => {
@@ -33,12 +34,13 @@ const App = (): JSX.Element => {
             }
         }} name="Home">
           {
-            () => (
-              <Home shoppingCart={shoppingCart} setShoppingCart={setShoppingCart} favotites={favorites} setFavorite={setFavorites} ></Home>
+            ({navigation}) => (
+              <Home navigation={navigation} shoppingCart={shoppingCart} setShoppingCart={setShoppingCart} favotites={favorites} setFavorite={setFavorites} ></Home>
             )
           }
         </Stack.Screen>
         <Stack.Screen name="ShoppingCart" component={ShoppingCart}></Stack.Screen>
+        <Stack.Screen options={{headerTitleAlign: 'center'}} name="Chat" component={Chat}></Stack.Screen>
         <Stack.Screen name="Favorites" options={{headerShown: false}}>
         {
             () => (<Favorites favorites={favorites} setFavorites={setFavorites}></Favorites>)
