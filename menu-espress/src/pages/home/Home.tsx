@@ -69,7 +69,10 @@ const Home = ({shoppingCart, setShoppingCart, favorites, setFavorites}: any) => 
                 <Pressable onPress={() => {
                   openToast("Item adicionado com sucesso!")
                   product.quantity+=1;
-                  setShoppingCart([...shoppingCart, product])
+                  const existingProduct = shoppingCart.find((item: any) => item.name === product.name);
+                  if (!existingProduct){
+                    setShoppingCart([...shoppingCart, product])
+                  }
                 }}
                 style={
                   ({pressed}:any) => (
