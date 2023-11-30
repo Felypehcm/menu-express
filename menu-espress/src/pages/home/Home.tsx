@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState } from 'react'
-import { Pressable, ScrollView, Text, ToastAndroid } from 'react-native'
+import { Pressable, ScrollView, Text, ToastAndroid, View } from 'react-native'
 import { Button, Card } from 'react-native-elements'
 import {FAB} from '@rneui/themed';
 import Icon from 'react-native-vector-icons/AntDesign'
@@ -50,12 +50,165 @@ const Home = ({navigation, shoppingCart, setShoppingCart, favorites, setFavorite
 
   return (
     <>
+      <View style={{flexDirection:'row', borderRadius: 50, justifyContent: 'space-between', marginHorizontal: 45, marginVertical: 20}}>
+        <Pressable style={{backgroundColor:'#fb4e30',
+                        height: 50,
+                        width: 50,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        borderRadius:50}}><Icon name="home" size={30} color="white"></Icon></Pressable>
+
+        <Pressable onPress={()=> (navigation.navigate('ShoppingCart', {shoppingCart}))} style={{backgroundColor:'#fb4e30',
+                        height: 50,
+                        width: 50,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        borderRadius:50}}><Icon name="shoppingcart" size={30} color="white"></Icon></Pressable>
+
+        <Pressable style={{backgroundColor:'#fb4e30',
+                        height: 50,
+                        width: 50,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        borderRadius: 50}}><Icon name="heart" size={30} color="white"></Icon></Pressable>
+
+        <Pressable style={{backgroundColor:'#fb4e30',
+                        height: 50,
+                        width: 50,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        borderRadius: 50}}><Icon name="user" size={30} color="white"/></Pressable>
+      </View>
       <ScrollView>
         <StatusBar backgroundColor='black'/>
         <ScrollView>
-          <Text style={{fontSize: 24, fontWeight: '700', paddingHorizontal: 20}}>Sanduiches</Text>
+
+{/* --------------------ESTA PARTE REPRESENTA A SESSÃO DE SANDUICHES --------------------*/}
+
+          <View style={{paddingHorizontal: 20, 
+                        backgroundColor: '#fb4e30', 
+                        marginHorizontal: 15, 
+                        justifyContent:'center',
+                        alignItems:'center',
+                        height: 50
+                        }}><Text style={{fontSize: 24, 
+                                        fontWeight: '700'}}>Sanduiches</Text></View>
           {
             productsSanduiches.map((product, i) => {
+              const [favorite, setFavorite] = useState(false)
+              return (
+                <Card key={i}>
+                  <Card.Title style={{fontSize: 30}}> {product.name} </Card.Title>
+                  <Card.Divider/>
+                  <Card.Image source={{uri: product.image}}/>
+                  <Text> Descrição: {product.description} </Text>
+                  <Text style={{fontSize: 20, marginEnd: "5%", marginBottom: "10%", marginTop: "3%"}}> Preço: {product.price} </Text>
+                  {
+                    favorite ? 
+                    <Icon onPress={() => (setFavorite(false))} name="heart" size={28} color="red"></Icon>:
+                    <Icon onPress={() => (setFavorite(true))} name="hearto" size={28}></Icon>
+                  }
+                  {/*<Button onPress={() => {
+                    setShoppingCart([...shoppingCart, product])
+                  }} title="Adicionar ao Carrinho"></Button>*/}
+
+                <Pressable onPress={() => {
+                  openToast("Item adicionado com sucesso!")
+                  product.quantity+=1;
+                  const existingProduct = shoppingCart.find((item: any) => item.name === product.name);
+                  if (!existingProduct){
+                    setShoppingCart([...shoppingCart, product])
+                  }
+                }}
+                style={
+                  ({pressed}:any) => (
+                    {
+                      backgroundColor: pressed ? '#2089dc' : '#fb4e30',
+                      height: 40,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      borderRadius: 8
+                    }
+                  )
+                }>
+                  <Text style={{fontSize: 18, color: 'white'}}>Adicionar ao Carrinho</Text>
+                </Pressable>
+              </Card>
+            )
+          })
+        }
+        </ScrollView>
+
+{/* --------------------ESTA PARTE REPRESENTA A SESSÃO DE Combos --------------------*/}
+
+        <ScrollView>
+          <View style={{paddingHorizontal: 20, 
+                        backgroundColor: '#fb4e30', 
+                        marginHorizontal: 15, 
+                        justifyContent:'center',
+                        alignItems:'center',
+                        height: 50
+                        }}><Text style={{fontSize: 24, 
+                                        fontWeight: '700'}}>Combos</Text></View>
+          {
+            productsCombos.map((product, i) => {
+              const [favorite, setFavorite] = useState(false)
+              return (
+                <Card key={i}>
+                  <Card.Title style={{fontSize: 30}}> {product.name} </Card.Title>
+                  <Card.Divider/>
+                  <Card.Image source={{uri: product.image}}/>
+                  <Text> Descrição: {product.description} </Text>
+                  <Text style={{fontSize: 20, marginEnd: "5%", marginBottom: "10%", marginTop: "3%"}}> Preço: {product.price} </Text>
+                  {
+                    favorite ? 
+                    <Icon onPress={() => (setFavorite(false))} name="heart" size={28} color="red"></Icon>:
+                    <Icon onPress={() => (setFavorite(true))} name="hearto" size={28}></Icon>
+                  }
+                  {/*<Button onPress={() => {
+                    setShoppingCart([...shoppingCart, product])
+                  }} title="Adicionar ao Carrinho"></Button>*/}
+
+                <Pressable onPress={() => {
+                  openToast("Item adicionado com sucesso!")
+                  product.quantity+=1;
+                  const existingProduct = shoppingCart.find((item: any) => item.name === product.name);
+                  if (!existingProduct){
+                    setShoppingCart([...shoppingCart, product])
+                  }
+                }}
+                style={
+                  ({pressed}:any) => (
+                    {
+                      backgroundColor: pressed ? '#2089dc' : '#fb4e30',
+                      height: 40,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      borderRadius: 8
+                    }
+                  )
+                }>
+                  <Text style={{fontSize: 18, color: 'white'}}>Adicionar ao Carrinho</Text>
+                </Pressable>
+              </Card>
+            )
+          })
+        }
+        </ScrollView>
+
+{/* --------------------ESTA PARTE REPRESENTA A SESSÃO DE BEBIDAS --------------------*/}
+
+        <ScrollView>
+          <View style={{paddingHorizontal: 20, 
+                        backgroundColor: '#fb4e30', 
+                        marginHorizontal: 15, 
+                        justifyContent:'center',
+                        alignItems:'center',
+                        height: 50
+                        }}><Text style={{fontSize: 24, 
+                                        fontWeight: '700'}}>Bebidas</Text></View>
+          {
+            productsBebidas.map((product, i) => {
               const [favorite, setFavorite] = useState(false)
               return (
                 <Card key={i}>

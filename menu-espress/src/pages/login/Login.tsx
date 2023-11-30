@@ -13,40 +13,40 @@ const Login = ({ navigation }: any) => {
     navigation.navigate(path);
   };
 
-  const handleLogin = () => {
-    if (!email && !password) {
-      Alert.alert('Preencha todos os campos', 'Informe seu email e senha.');
-      return;
-    }
+  // const handleLogin = () => {
+  //   if (!email && !password) {
+  //     Alert.alert('Preencha todos os campos', 'Informe seu email e senha.');
+  //     return;
+  //   }
 
-    if (!email) {
-      Alert.alert('Campo obrigatório', 'Informe seu email.');
-      return;
-    }
+  //   if (!email) {
+  //     Alert.alert('Campo obrigatório', 'Informe seu email.');
+  //     return;
+  //   }
 
-    if (!password) {
-      Alert.alert('Campo obrigatório', 'Informe sua senha.');
-      return;
-    }
+  //   if (!password) {
+  //     Alert.alert('Campo obrigatório', 'Informe sua senha.');
+  //     return;
+  //   }
 
-    if (!email.includes('@') || !email.includes('.com')) {
-      Alert.alert('Email inválido', 'Informe um email válido.');
-      return;
-    }
+  //   if (!email.includes('@') || !email.includes('.com')) {
+  //     Alert.alert('Email inválido', 'Informe um email válido.');
+  //     return;
+  //   }
 
-    if (password.length < 6) {
-      Alert.alert('Senha inválida', 'A senha deve ter no mínimo 6 caracteres.');
-      return;
-    }
+  //   if (password.length < 6) {
+  //     Alert.alert('Senha inválida', 'A senha deve ter no mínimo 6 caracteres.');
+  //     return;
+  //   }
 
-    const fakeUser = { email: 'usuario@gmail.com', password: 'senha123' };
-    if (email === fakeUser.email && password === fakeUser.password) {
-      Alert.alert('Login bem-sucedido', 'Bem-vindo!');
-      goTopage('Home')
-    } else {
-      Alert.alert('Usuário não encontrado', 'Verifique suas credenciais.');
-    }
-  };
+  //   const fakeUser = { email: 'usuario@gmail.com', password: 'senha123' };
+  //   if (email === fakeUser.email && password === fakeUser.password) {
+  //     Alert.alert('Login bem-sucedido', 'Bem-vindo!');
+  //     goTopage('Home')
+  //   } else {
+  //     Alert.alert('Usuário não encontrado', 'Verifique suas credenciais.');
+  //   }
+  // };
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={10} style={styles.container}>
@@ -85,7 +85,7 @@ const Login = ({ navigation }: any) => {
                   Esqueci a senha
                 </Text>
               </View>
-              <Button onPress={handleLogin} title="Entrar"></Button>
+              <Button onPress={() => goTopage('Home')} title="Entrar"></Button>
             </View>
           </ImageBackground>
         </View>
