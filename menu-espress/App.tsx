@@ -39,7 +39,7 @@ const App = (): JSX.Element => {
             )
           }
         </Stack.Screen>
-        <Stack.Screen name="ShoppingCart" component={ShoppingCart}></Stack.Screen>
+        <Stack.Screen name="ShoppingCart" component={ShoppingCart} options={{title: 'Carrinho'}}></Stack.Screen>
         <Stack.Screen options={{headerTitleAlign: 'center'}} name="Chat" component={Chat}></Stack.Screen>
         <Stack.Screen name="Favorites" options={{headerShown: false}}>
         {

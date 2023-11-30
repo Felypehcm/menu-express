@@ -19,7 +19,9 @@ const styles = StyleSheet.create({
 
 
     createForgortLink: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginLeft: 20,
+        paddingTop:15
     },
 
 
