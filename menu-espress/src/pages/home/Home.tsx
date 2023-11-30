@@ -50,35 +50,7 @@ const Home = ({navigation, shoppingCart, setShoppingCart, favorites, setFavorite
 
   return (
     <>
-      <View style={{flexDirection:'row', borderRadius: 50, justifyContent: 'space-between', marginHorizontal: 45, marginVertical: 20}}>
-        <Pressable style={{backgroundColor:'#fb4e30',
-                        height: 50,
-                        width: 50,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderRadius:50}}><Icon name="home" size={30} color="white"></Icon></Pressable>
 
-        <Pressable onPress={()=> (navigation.navigate('ShoppingCart', {shoppingCart}))} style={{backgroundColor:'#fb4e30',
-                        height: 50,
-                        width: 50,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderRadius:50}}><Icon name="shoppingcart" size={30} color="white"></Icon></Pressable>
-
-        <Pressable style={{backgroundColor:'#fb4e30',
-                        height: 50,
-                        width: 50,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderRadius: 50}}><Icon name="heart" size={30} color="white"></Icon></Pressable>
-
-        <Pressable style={{backgroundColor:'#fb4e30',
-                        height: 50,
-                        width: 50,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderRadius: 50}}><Icon name="user" size={30} color="white"/></Pressable>
-      </View>
       <ScrollView>
         <StatusBar backgroundColor='black'/>
         <ScrollView>
@@ -260,6 +232,35 @@ const Home = ({navigation, shoppingCart, setShoppingCart, favorites, setFavorite
         color="green"
         onPress={() => openChat()}
       />
+      <View style={{flexDirection:'row', borderRadius: 50, justifyContent: 'space-between', marginHorizontal: 45, marginVertical: 20}}>
+        <Pressable style={{backgroundColor:'#fb4e30',
+                        height: 50,
+                        width: 50,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        borderRadius:50}}><Icon name="home" size={30} color="white"></Icon></Pressable>
+
+        <Pressable onPress={()=> (navigation.navigate('ShoppingCart', {shoppingCart}))} style={{backgroundColor:'#fb4e30',
+                        height: 50,
+                        width: 50,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        borderRadius:50}}><Icon name="shoppingcart" size={30} color="white"></Icon></Pressable>
+
+        <Pressable onPress={()=> (navigation.navigate('Favorites', {favorites}))} style={{backgroundColor:'#fb4e30',
+                        height: 50,
+                        width: 50,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        borderRadius: 50}}><Icon name="heart" size={30} color="white"></Icon></Pressable>
+
+        <Pressable style={{backgroundColor:'#fb4e30',
+                        height: 50,
+                        width: 50,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        borderRadius: 50}}><Icon name="profile" size={30} color="white"/></Pressable>
+    </View>
     </>
   );
 }

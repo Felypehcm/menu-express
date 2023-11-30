@@ -80,7 +80,7 @@ const ShoppingCart = ({route}: any) => {
         </Card>
       ))}
     </ScrollView>
-    )
+    )   
 }
 
 export default ShoppingCart

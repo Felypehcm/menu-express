@@ -26,7 +26,7 @@ const App = (): JSX.Element => {
         <Stack.Screen options={{title: 'Recuperar Senha', headerTintColor: '#000', headerShown: false}} name="forgotPassword" component={ForgotPassword}></Stack.Screen>
         <Stack.Screen options={({navigation}) => {
           return {
-            title: 'Lanches',
+            title: 'Início',
             headerBackVisible: false,
               headerTitleAlign: 'center', 
               headerRight: () => (<Batata onPress={()=> (navigation.navigate('ShoppingCart', {shoppingCart}))} name="shoppingcart" size={25}></Batata>),
@@ -41,7 +41,7 @@ const App = (): JSX.Element => {
         </Stack.Screen>
         <Stack.Screen name="ShoppingCart" component={ShoppingCart} options={{title: 'Carrinho'}}></Stack.Screen>
         <Stack.Screen options={{headerTitleAlign: 'center'}} name="Chat" component={Chat}></Stack.Screen>
-        <Stack.Screen name="Favorites" options={{headerShown: false}}>
+        <Stack.Screen options={{headerTitleAlign: 'center'}} name="Favorites" >
         {
             () => (<Favorites favorites={favorites} setFavorites={setFavorites}></Favorites>)
         }
