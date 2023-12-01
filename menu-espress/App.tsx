@@ -1,16 +1,17 @@
-import  Batata  from 'react-native-vector-icons/AntDesign';
+import login from './src/pages/login/Login';
+import Login from './src/pages/login/Login';
+import CreateAccount from './src/pages/createAccount/CreateAccount';
+import ForgotPassword from './src/pages/forgotPassword/ForgotPassword';
+import Home from './src/pages/home/Home';
+import ShoppingCart from './src/pages/shoppingCart/ShoppingCart';
+import Favorites from './src/pages/favorites/Favorites';
+import Chat from './src/pages/Chat/chat';
+import  IconTop  from 'react-native-vector-icons/AntDesign';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import login from './src/pages/login/Login';
-import CreateAccount from './src/pages/createAccount/CreateAccount';
-import Home from './src/pages/home/Home';
-import ForgotPassword from './src/pages/forgotPassword/ForgotPassword';
-import ShoppingCart from './src/pages/shoppingCart/ShoppingCart';
 import { useState } from 'react';
-import Favorites from './src/pages/favorites/Favorites';
-import Login from './src/pages/login/Login';
 import { Header } from 'react-native-elements';
-import Chat from './src/pages/Chat/chat';
+
 
 
 const App = (): JSX.Element => {
@@ -29,8 +30,8 @@ const App = (): JSX.Element => {
             title: 'Início',
             headerBackVisible: false,
               headerTitleAlign: 'center', 
-              headerRight: () => (<Batata onPress={()=> (navigation.navigate('ShoppingCart', {shoppingCart}))} name="shoppingcart" size={25}></Batata>),
-              headerLeft: () => (<Batata onPress={()=> (navigation.navigate('login'))} name="logout" size={25}></Batata>)
+              headerRight: () => (<IconTop onPress={()=> (navigation.navigate('ShoppingCart', {shoppingCart}))} name="shoppingcart" size={25}></IconTop>),
+              headerLeft: () => (<IconTop onPress={()=> (navigation.navigate('login'))} name="logout" size={25}></IconTop>)
             }
         }} name="Home">
           {
@@ -41,7 +42,7 @@ const App = (): JSX.Element => {
         </Stack.Screen>
         <Stack.Screen name="ShoppingCart" component={ShoppingCart} options={{title: 'Carrinho'}}></Stack.Screen>
         <Stack.Screen options={{headerTitleAlign: 'center'}} name="Chat" component={Chat}></Stack.Screen>
-        <Stack.Screen options={{headerTitleAlign: 'center'}} name="Favorites" >
+        <Stack.Screen options={{headerTitleAlign: 'center', title:'Favoritos'}} name="Favorites">
         {
             () => (<Favorites favorites={favorites} setFavorites={setFavorites}></Favorites>)
         }
