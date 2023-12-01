@@ -88,8 +88,13 @@ const Home = ({navigation, shoppingCart, setShoppingCart, favorites, setFavorite
                   openToast("Item adicionado com sucesso!")
                   product.quantity+=1;
                   const existingProduct = shoppingCart.find((item: any) => item.name === product.name);
-                  if (!existingProduct){
+                  const emptyProduct = shoppingCart.find((item: any) => item.quantity <= 0);
+                  if (!existingProduct && !emptyProduct){
                     setShoppingCart([...shoppingCart, product])
+                  }
+                  if (emptyProduct){
+                    const notEmptyProducts = shoppingCart.filter((item: any) => item.quantity > 0);
+                    setShoppingCart(notEmptyProducts)
                   }
                 }}
                 style={

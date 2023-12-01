@@ -12,8 +12,15 @@ const ShoppingCart = ({route}: any) => {
     const [cartItems, setCartItems] = useState([...shoppingCart]);
 
     useEffect(() => {
-      
+      const updatedCart = cartItems.filter((item) => item.quantity > 0);
+      if (!arraysEqual(cartItems, updatedCart)) {
+        setCartItems(updatedCart);
+      }
     }, [cartItems])
+
+    function arraysEqual(arr1: any, arr2: any) {
+      return JSON.stringify(arr1) === JSON.stringify(arr2);
+    }
 
     const handleRemoveItem = (index: number) => {
       const updatedCart = [...cartItems];
@@ -34,7 +41,7 @@ const ShoppingCart = ({route}: any) => {
       updatedCart[index].quantity += 1;
       setCartItems(updatedCart);
     };
-
+    
     return (
         <ScrollView>
       {cartItems.map((prod: any, i: number) => (
