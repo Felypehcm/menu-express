@@ -62,9 +62,9 @@ const Login = ({ navigation }: any) => {
           <ImageBackground source={require(imgbg)} style={styles.imgbg}>
             <View style={styles.box}>
               <View style={styles.logo}>
-                <Image source={require('../tentativa6.png')} />
+                <Image source={require('../../../assets/logo.png')} />
               </View>
-              <Text style={styles.text}>Login</Text>
+              <Text style={styles.text}>E-mail</Text>
               <TextInput
                 style={styles.input}
                 placeholder="Digite um email..."
@@ -75,7 +75,7 @@ const Login = ({ navigation }: any) => {
                 onChangeText={(text) => setEmail(text)}
               />
 
-              <Text style={styles.text}>Password</Text>
+              <Text style={styles.text}>Senha</Text>
               <TextInput
                 secureTextEntry={true}
                 style={styles.input}
@@ -86,10 +86,10 @@ const Login = ({ navigation }: any) => {
 
               <View style={styles.createForgortLink}>
                 <Text onPress={() => goTopage('createAccount')} style={styles.link}>
-                  Create Accout
+                  Criar Conta
                 </Text>
                 <Text onPress={() => goTopage('forgotPassword')} style={styles.link}>
-                  Forgot Password
+                  Esqueci a senha
                 </Text>
               </View>
               <Button onPress={() => goTopage('Home')} title="Entrar"></Button>
