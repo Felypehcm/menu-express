@@ -8,7 +8,6 @@ import { useState } from 'react';
 const Favorites = ({favorites, setFavorites, ShoppingCart, Home}: any) => {
 
   const navigation = useNavigation();
-  const [shoppingCart, setShoppingCart] = useState([])
 
   return (
 <View style={{position:'absolute', bottom: 0}}>
