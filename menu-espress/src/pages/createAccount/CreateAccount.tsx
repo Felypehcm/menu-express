@@ -8,8 +8,6 @@ import { KeyboardAvoidingView } from 'react-native';
 
 const imgbg='./bg.png'
 
-
-
 const CreateAccount = ({navigation}: any) => {
   const goTopage = (path: string) => {
     navigation.navigate(path)
@@ -45,7 +43,6 @@ const CreateAccount = ({navigation}: any) => {
             secureTextEntry={true} 
             style={styles.input}
             placeholder='Senha'
-            keyboardType='number-pad'
             returnKeyType='done' />
 
           <Text style={styles.text}>Confirme sua senha</Text>
@@ -53,10 +50,9 @@ const CreateAccount = ({navigation}: any) => {
             secureTextEntry={true} 
             style={styles.input}
             placeholder='Senha'
-            keyboardType='number-pad'
             returnKeyType='done' />
 
-            <CheckBox title={'Eu aceito os teromos de uso'}
+            <CheckBox title={'Eu aceito os termos de uso'}
               checkedIcon={'check'}
               uncheckedIcon={'square-o'}
               checkedColor='green'
