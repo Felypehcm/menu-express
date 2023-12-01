@@ -11,9 +11,28 @@ const ShoppingCart = ({route}: any) => {
     const [cartItems, setCartItems] = useState([...shoppingCart]);
 
     useEffect(() => {
-
+      
     }, [cartItems])
 
+    const handleRemoveItem = (index: number) => {
+      const updatedCart = [...cartItems];
+      updatedCart[index].quantity -= 1;
+  
+      if (updatedCart[index].quantity <= 0) {
+        openToast("Item removido com sucesso!");
+        // Remove o item se a quantidade for menor ou igual a 0
+        updatedCart.splice(index, 1);
+      }
+  
+      setCartItems(updatedCart);
+    };
+  
+    const handleAddItem = (index: number) => {
+      openToast("Item adicionado com sucesso!");
+      const updatedCart = [...cartItems];
+      updatedCart[index].quantity += 1;
+      setCartItems(updatedCart);
+    };
 
     return (
         <ScrollView>
@@ -35,12 +54,7 @@ const ShoppingCart = ({route}: any) => {
             }}
           >
             <Pressable
-              onPress={() => {
-                openToast("Item removido com sucesso!");
-                const updatedCart = [...cartItems];
-                updatedCart[i].quantity -= 1;
-                setCartItems(updatedCart);
-              }}
+              onPress={() => handleRemoveItem(i)}
               style={({ pressed }: any) => ({
                 backgroundColor: pressed ? '#2089dc' : '#fb4e30',
                 height: 40,
@@ -58,12 +72,7 @@ const ShoppingCart = ({route}: any) => {
               {prod.quantity}
             </Text>
             <Pressable
-              onPress={() => {
-                openToast("Item adicionado com sucesso!");
-                const updatedCart = [...cartItems];
-                updatedCart[i].quantity += 1;
-                setCartItems(updatedCart);
-              }}
+              onPress={() => handleAddItem(i)}
               style={({ pressed }: any) => ({
                 backgroundColor: pressed ? '#2089dc' : '#fb4e30',
                 height: 40,
