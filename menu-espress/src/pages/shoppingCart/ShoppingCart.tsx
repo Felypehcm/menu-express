@@ -1,6 +1,7 @@
 import { useState, useEffect }from "react";
 import { Text, ScrollView, Pressable, ToastAndroid, View } from "react-native"
 import { Card } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/AntDesign'
 
 const ShoppingCart = ({route}: any) => {
     const{shoppingCart} = route.params

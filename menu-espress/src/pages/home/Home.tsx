@@ -232,7 +232,7 @@ const Home = ({navigation, shoppingCart, setShoppingCart, favorites, setFavorite
         color="green"
         onPress={() => openChat()}
       />
-      <View style={{flexDirection:'row', borderRadius: 50, justifyContent: 'space-between', marginHorizontal: 45, marginVertical: 20}}>
+      <View style={{flexDirection:'row', borderRadius: 50,  justifyContent: 'space-between', marginHorizontal: 45, marginVertical: 20}}>
         <Pressable style={{backgroundColor:'#fb4e30',
                         height: 50,
                         width: 50,

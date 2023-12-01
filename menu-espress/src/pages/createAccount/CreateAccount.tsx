@@ -26,7 +26,7 @@ const CreateAccount = ({navigation}: any) => {
       <ImageBackground source={(require(imgbg))} style={styles.imgbg}>
         <View style={styles.box}>
           <View style={styles.logo}>
-            <Image source={require('../tentativa6.png')}/>
+            <Image source={require('../../../assets/logo.png')}/>
           </View>
           <Text style={styles.text}>Digite seu nome completo</Text>
           <TextInput 
