@@ -10,18 +10,16 @@ const imgbg = './bg.png';
 const Login = ({ navigation }: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+   
   const onSubmit = async () => {
-    const result = await httpService.login({email, password})
-    console.log(result);
-    const data = await result.json()
-    console.log(data);
+    const result = await httpService.login(email, password);
+    const data = await result.json();
     
     if (result.status === 200) {
       try {
-        storageService.set('userData', JSON.stringify(data))
-        goTopage('Home')
-        ToastAndroid.show(data.message, 5000)
+        storageService.set('userData', JSON.stringify(data));
+        goTopage('Home');
+        ToastAndroid.show(data.message, 5000);
       } catch (e) {
         ToastAndroid.show('Não foi possível logar no sistema. Tente novamente mais tarde!', 5000)
       }
@@ -47,7 +45,7 @@ const Login = ({ navigation }: any) => {
       return;
     }
     else {
-      ToastAndroid.show(data.message, 5000)
+      ToastAndroid.show(data.message, 5000);
     }
   }
 
@@ -92,7 +90,7 @@ const Login = ({ navigation }: any) => {
                   Esqueci a senha
                 </Text>
               </View>
-              <Button onPress={() => goTopage('Home')} title="Entrar"></Button>
+              <Button onPress={onSubmit} title="Entrar"></Button>
             </View>
           </ImageBackground>
         </View>

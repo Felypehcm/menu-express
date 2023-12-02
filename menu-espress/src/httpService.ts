@@ -1,17 +1,13 @@
-interface Credentials {
-  email: string;
-  password: string;
-}
-
 const httpService = {
-  login: async (credentials: Credentials) => {
+  login: async (email: string, password: string) => {
     try {
-      const response = await fetch('http://localhost:8080/api/auth/login', {
+      const response = await fetch('http://192.168.0.13:8080/api/auth/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          Accept: 'application.json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(credentials),
+        body: JSON.stringify({email, password}),
       });
 
       return response;
