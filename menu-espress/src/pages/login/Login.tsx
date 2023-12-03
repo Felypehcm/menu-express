@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './LoginStyle';
 import httpService from '../../httpService';
 import storageService from '../../storageService';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const imgbg = './bg.png';
 
@@ -18,32 +19,42 @@ const Login = ({ navigation }: any) => {
     if (result.status === 200) {
       try {
         storageService.set('userData', JSON.stringify(data));
+        await AsyncStorage.setItem('userToken', data.token);
+        await AsyncStorage.setItem('userProfileImage', data.pathImage);
+        await AsyncStorage.setItem('userName', data.name);
+        await AsyncStorage.setItem('userEmail', data.email);
         goTopage('Home');
         ToastAndroid.show(data.message, 5000);
       } catch (e) {
         ToastAndroid.show('Não foi possível logar no sistema. Tente novamente mais tarde!', 5000)
       }
     } 
+
     if (!email && !password) {
       Alert.alert('Preencha todos os campos', 'Informe seu email e senha.');
       return;
     }
+
     if (!email) {
       Alert.alert('Campo obrigatório', 'Informe seu email.');
       return;
     }
+
     if (!password) {
       Alert.alert('Campo obrigatório', 'Informe sua senha.');
       return;
     }
+
     if (!email.includes('@') || !email.includes('.com')) {
       Alert.alert('Email inválido', 'Informe um email válido.');
       return;
     }
+
     if (password.length < 6) {
       Alert.alert('Senha inválida', 'A senha deve ter no mínimo 6 caracteres.');
       return;
     }
+    
     else {
       ToastAndroid.show(data.message, 5000);
     }
