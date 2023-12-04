@@ -100,7 +100,7 @@ const Login = ({ navigation }: any) => {
                   Esqueci a senha
                 </Text>
               </View>
-              <Button onPress={() => goTopage("Home")} title="Entrar"></Button>
+              <Button onPress={onSubmit} title="Entrar"></Button>
             </View>
           </ImageBackground>
         </View>
