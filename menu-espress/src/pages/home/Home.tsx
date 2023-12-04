@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Pressable, ScrollView, Text, ToastAndroid, View } from 'react-native'
 import { Button, Card } from 'react-native-elements'
 import {FAB} from '@rneui/themed';
 import Icon from 'react-native-vector-icons/AntDesign'
 import Style from './HomeStyle'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const productsSanduiches = [
   {name: "X Bacon", price: 32, quantity: 0, description: "X Bacon", image: "https://embutidosbonatti.ind.br/temp/BIN_57_V9Fb0BwK.jpg"},
@@ -55,6 +56,18 @@ const Home = ({navigation, shoppingCart, setShoppingCart, favorites, setFavorite
     navigation.navigate('Chat')
   }
 
+  const [userProfileImage, setUserProfileImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchUserProfileImage = async () => {
+      // Pega a url do perfil do MONGO
+      const profileImage = await AsyncStorage.getItem('userProfileImage');
+      setUserProfileImage(profileImage);
+    };
+
+    fetchUserProfileImage();
+  }, []);
+
   return (
     <>
 
@@ -95,8 +108,13 @@ const Home = ({navigation, shoppingCart, setShoppingCart, favorites, setFavorite
                   openToast("Item adicionado com sucesso!")
                   product.quantity+=1;
                   const existingProduct = shoppingCart.find((item: any) => item.name === product.name);
-                  if (!existingProduct){
+                  const emptyProduct = shoppingCart.find((item: any) => item.quantity <= 0);
+                  if (!existingProduct && !emptyProduct){
                     setShoppingCart([...shoppingCart, product])
+                  }
+                  if (emptyProduct){
+                    const notEmptyProducts = shoppingCart.filter((item: any) => item.quantity > 0);
+                    setShoppingCart(notEmptyProducts)
                   }
                 }}
                 style={

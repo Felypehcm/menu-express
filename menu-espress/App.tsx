@@ -6,6 +6,7 @@ import Home from './src/pages/home/Home';
 import ShoppingCart from './src/pages/shoppingCart/ShoppingCart';
 import Favorites from './src/pages/favorites/Favorites';
 import Chat from './src/pages/Chat/chat';
+import Profile from './src/pages/Profile/Profile';
 import  IconTop  from 'react-native-vector-icons/AntDesign';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -30,8 +31,7 @@ const App = (): JSX.Element => {
             title: 'Início',
             headerBackVisible: false,
               headerTitleAlign: 'center', 
-              headerRight: () => (<IconTop onPress={()=> (navigation.navigate('ShoppingCart', {shoppingCart}))} name="shoppingcart" size={25}></IconTop>),
-              headerLeft: () => (<IconTop onPress={()=> (navigation.navigate('login'))} name="logout" size={25}></IconTop>)
+              headerRight: () => (<IconTop onPress={()=> (navigation.navigate('Profile'))} name="user" size={25}></IconTop>)
             }
         }} name="Home">
           {
@@ -40,6 +40,7 @@ const App = (): JSX.Element => {
             )
           }
         </Stack.Screen>
+        <Stack.Screen name="Profile" component={Profile} options={{title: 'Profile'}}></Stack.Screen>
         <Stack.Screen name="ShoppingCart" component={ShoppingCart} options={{title: 'Carrinho'}}></Stack.Screen>
         <Stack.Screen options={{headerTitleAlign: 'center'}} name="Chat" component={Chat}></Stack.Screen>
         <Stack.Screen options={{headerTitleAlign: 'center', title:'Favoritos'}} name="Favorites">

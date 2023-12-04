@@ -5,17 +5,53 @@ import  Icon  from 'react-native-vector-icons/MaterialIcons';
 import styles from '../createAccount/CreateAccountStyle'
 import { CheckBox } from 'react-native-elements';
 import { KeyboardAvoidingView } from 'react-native';
+import httpService from '../../httpService';
 
 const imgbg='./bg.png'
 
+const CreateAccount = ({ navigation }: any) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [isSelected, setSelected] = useState(false);
 
-
-const CreateAccount = ({navigation}: any) => {
   const goTopage = (path: string) => {
-    navigation.navigate(path)
-  }
+    navigation.navigate(path);
+  };
 
-  const[isSelected, setSelected] = useState(false)
+  const handleSignUp = async () => {
+    // Verifica se ta vazio o campo
+    if (!name || !email || !password || !confirmPassword) {
+      console.error('Preencha todos os campos.');
+      return;
+    }
+
+    // Se as senhas for diferente informa
+    if (password !== confirmPassword) {
+      console.error('Senhas não coincidem.');
+      return;
+    }
+
+    try {
+      const result = await httpService.signup(name, email, password);
+
+      if (result) {
+        const data = await result.json();
+
+        if (result.status === 201) {
+          console.log('Usuário cadastrado com sucesso:', data);
+          goTopage('Login');
+        } else {
+          console.error('Erro ao cadastrar usuário:', data.error);
+        }
+      } else {
+        console.error('Erro na resposta do servidor.');
+      }
+    } catch (error) {
+      console.error('Erro ao fazer a solicitação de cadastro:', error);
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -32,31 +68,33 @@ const CreateAccount = ({navigation}: any) => {
           <TextInput 
             style={styles.input}
             placeholder='Nome' 
-            returnKeyType="done" />
+            returnKeyType="done" 
+            onChangeText={(text) => setName(text)}/>
 
           <Text style={styles.text}>Digite seu email</Text>
           <TextInput 
             style={styles.input}
             placeholder='Email' 
-            returnKeyType="done" />
+            returnKeyType="done" 
+            onChangeText={(text) => setEmail(text)}/>
 
           <Text style={styles.text}>Digite sua senha</Text>
           <TextInput 
             secureTextEntry={true} 
             style={styles.input}
             placeholder='Senha'
-            keyboardType='number-pad'
-            returnKeyType='done' />
+            returnKeyType='done' 
+            onChangeText={(text) => setPassword(text)}/>
 
           <Text style={styles.text}>Confirme sua senha</Text>
           <TextInput 
             secureTextEntry={true} 
             style={styles.input}
             placeholder='Senha'
-            keyboardType='number-pad'
-            returnKeyType='done' />
+            returnKeyType='done' 
+            onChangeText={(text) => setConfirmPassword(text)}/>
 
-            <CheckBox title={'Eu aceito os teromos de uso'}
+            <CheckBox title={'Eu aceito os termos de uso'}
               checkedIcon={'check'}
               uncheckedIcon={'square-o'}
               checkedColor='green'
@@ -64,7 +102,7 @@ const CreateAccount = ({navigation}: any) => {
               checked={isSelected}
               onPress={() => setSelected(!isSelected)}/>
 
-          <Button onPress={() => {goTopage("Login")}} title="Cadastrar"></Button>
+          <Button onPress={handleSignUp} title="Cadastrar"></Button>
           </View>
       </ImageBackground>
       </ScrollView>
