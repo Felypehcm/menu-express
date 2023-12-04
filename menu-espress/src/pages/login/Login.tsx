@@ -20,7 +20,6 @@ const Login = ({ navigation }: any) => {
       try {
         storageService.set('userData', JSON.stringify(data));
         await AsyncStorage.setItem('userToken', data.token);
-        await AsyncStorage.setItem('userProfileImage', data.pathImage);
         await AsyncStorage.setItem('userName', data.name);
         await AsyncStorage.setItem('userEmail', data.email);
         goTopage('Home');
@@ -101,7 +100,7 @@ const Login = ({ navigation }: any) => {
                   Esqueci a senha
                 </Text>
               </View>
-              <Button onPress={() => goTopage('Home')} title="Entrar"></Button>
+              <Button onPress={onSubmit} title="Entrar"></Button>
             </View>
           </ImageBackground>
         </View>

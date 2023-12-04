@@ -1,9 +1,11 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+const BASE_URL = 'http://192.168.0.13:8080/api';
+
 const httpService = {
   login: async (email: string, password: string) => {
     try {
-      const response = await fetch('http://localhost:8080/api/auth/login', {
+      const response = await fetch(`${BASE_URL}/auth/login`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -11,9 +13,7 @@ const httpService = {
         },
         body: JSON.stringify({ email, password }),
       });
-
       return response;
-
     } catch (error) {
       console.error('Erro ao fazer a solicitação de login:', error);
       throw error;
@@ -22,7 +22,7 @@ const httpService = {
 
   signup: async (name: string, email: string, password: string) => {
     try {
-      const response = await fetch('http://localhost:8080/api/user/create', {
+      const response = await fetch(`${BASE_URL}/user/create`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -30,9 +30,7 @@ const httpService = {
         },
         body: JSON.stringify({ name, email, password }),
       });
-
       return response;
-
     } catch (error) {
       console.error('Erro ao fazer a solicitação de cadastro:', error);
       throw error;
