@@ -107,7 +107,7 @@ const ShoppingCart = ({route}: any) => {
         <Pressable onPress={()=> (navigation.navigate('Home'))} style={{backgroundColor:'#fb4e30',
                         height: 50,
                         width: 50,
-                        marginHorizontal:12,
+                        marginHorizontal:14,
                         justifyContent: 'center',
                         alignItems: 'center',
                         borderRadius:50}}><Icon name="home" size={30} color="white"></Icon></Pressable>
@@ -115,7 +115,7 @@ const ShoppingCart = ({route}: any) => {
         <Pressable   style={{backgroundColor:'#fb4e30',
                         height: 50,
                         width: 50,
-                        marginHorizontal:12,
+                        marginHorizontal:14,
                         justifyContent: 'center',
                         alignItems: 'center',
                         borderRadius:50}}><Icon name="shoppingcart" size={30} color="white"></Icon></Pressable>
@@ -123,7 +123,7 @@ const ShoppingCart = ({route}: any) => {
         <Pressable onPress={()=> (navigation.navigate('Favorites'))} style={{backgroundColor:'#fb4e30',
                         height: 50,
                         width: 50,
-                        marginHorizontal:12,
+                        marginHorizontal:14,
                         justifyContent: 'center',
                         alignItems: 'center',
                         borderRadius: 50}}><Icon name="heart" size={30} color="white"></Icon></Pressable>
@@ -131,7 +131,7 @@ const ShoppingCart = ({route}: any) => {
         <Pressable style={{backgroundColor:'#fb4e30',
                         height: 50,
                         width: 50,
-                        marginHorizontal:12,
+                        marginHorizontal:14,
                         justifyContent: 'center',
                         alignItems: 'center',
                         borderRadius: 50}}><Icon name="profile" size={30} color="white"/></Pressable>
