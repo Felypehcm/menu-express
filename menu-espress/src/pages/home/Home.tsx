@@ -9,7 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const productsSanduiches = [
   {name: "X Bacon", price: 32, quantity: 0, description: "X Bacon", image: "https://embutidosbonatti.ind.br/temp/BIN_57_V9Fb0BwK.jpg"},
-  {name: "X Salad", price: "R$ 28,00", quantity: 0, description: "X Salad", image: "https://d1etmlapode6io.cloudfront.net/images/fidelizze/demofood/items/rsz_ilya-mashkov-mkva2hljgni-unsplash_637260269992723902.jpg"},
+  {name: "X Salad", price: 28, quantity: 0, description: "X Salad", image: "https://d1etmlapode6io.cloudfront.net/images/fidelizze/demofood/items/rsz_ilya-mashkov-mkva2hljgni-unsplash_637260269992723902.jpg"},
   {name: "X Egg", price: "R$ 28,00", quantity: 0, description: "X Egg", image: "https://www.receiteria.com.br/wp-content/uploads/receitas-de-x-egg-4-730x449.jpg"},
   {name: "X Calabresa", price: "R$ 28,00", quantity: 0, description: "X Calabresa", image: "https://storage.googleapis.com/domain-images/bd77a99c-250c-464d-816b-e8f862fd1122/products/gallery_301e217e-7a0f-456a-9db5-fe871ace1f09.jpg"},
   {name: "X Frango", price: "R$ 30,00", quantity: 0, description: "X Frango", image: "https://looklanches.com.br/wp-content/uploads/2020/09/x-frango-tudo.jpg"},

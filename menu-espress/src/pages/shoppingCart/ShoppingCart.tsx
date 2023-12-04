@@ -4,7 +4,7 @@ import { Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native';
 
-const ShoppingCart = ({route}: any) => {
+const ShoppingCart = ({route, orders}: any) => {
   const navigation = useNavigation();
     const{shoppingCart} = route.params
     const openToast = (message: string) => {
@@ -12,13 +12,20 @@ const ShoppingCart = ({route}: any) => {
       }
 
     const [cartItems, setCartItems] = useState([...shoppingCart]);
+    const [totalToPay, setTotalToPay] = useState(0);
 
     useEffect(() => {
       const updatedCart = cartItems.filter((item) => item.quantity > 0);
       if (!arraysEqual(cartItems, updatedCart)) {
         setCartItems(updatedCart);
       }
-    }, [cartItems])
+
+      const total = updatedCart.reduce(
+        (accumulator, item) => accumulator + item.price * item.quantity,
+        0
+      );
+      setTotalToPay(total);
+    }, [cartItems,totalToPay])
 
     function arraysEqual(arr1: any, arr2: any) {
       return JSON.stringify(arr1) === JSON.stringify(arr2);
@@ -46,7 +53,7 @@ const ShoppingCart = ({route}: any) => {
     
     return (
       <>
-        <ScrollView>
+        <ScrollView style={{ marginBottom: 80 }}>
       {cartItems.map((prod: any, i: number) => (
         <Card key={i}>
           <Card.Title style={{ fontSize: 22 }}> {prod.name} </Card.Title>
@@ -101,41 +108,30 @@ const ShoppingCart = ({route}: any) => {
       ))}
     </ScrollView>
     
-    <View style={{position:'absolute', bottom: 0}}>
-      <View style={{position:'absolute', bottom: 0, flexDirection:'row', borderRadius: 50, justifyContent: 'space-between', marginHorizontal: 45, marginVertical: 20}}>
-        <Pressable onPress={()=> (navigation.navigate('Home'))} style={{backgroundColor:'#fb4e30',
-                        height: 50,
-                        width: 50,
-                        marginHorizontal:14,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderRadius:50}}><Icon name="home" size={30} color="white"></Icon></Pressable>
-
-        <Pressable   style={{backgroundColor:'#fb4e30',
-                        height: 50,
-                        width: 50,
-                        marginHorizontal:14,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderRadius:50}}><Icon name="shoppingcart" size={30} color="white"></Icon></Pressable>
-
-        <Pressable onPress={()=> (navigation.navigate('Favorites'))} style={{backgroundColor:'#fb4e30',
-                        height: 50,
-                        width: 50,
-                        marginHorizontal:14,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderRadius: 50}}><Icon name="heart" size={30} color="white"></Icon></Pressable>
-
-        <Pressable style={{backgroundColor:'#fb4e30',
-                        height: 50,
-                        width: 50,
-                        marginHorizontal:14,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderRadius: 50}}><Icon name="profile" size={30} color="white"/></Pressable>
+    <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            backgroundColor: 'white',
+            justifyContent: 'space-between',
+            paddingHorizontal: 16,
+            paddingVertical: 20,
+          }}>
+          <Text style={{ fontSize: 18, color: 'black' }}>Valor Total: {totalToPay.toFixed(2)}</Text>
+          <Pressable
+            onPress={()=> (navigation.navigate('Orders', {orders}))}
+            style={({ pressed }: any) => ({
+              backgroundColor: pressed ? '#2089dc' : '#fb4e30',
+              height: 40,
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 8,
+              width: '40%', // Adjust the width as needed
+            })}>
+            <Text style={{ fontSize: 18, color: 'white' }}>Comprar</Text>
+          </Pressable>
+        </View>
       </View>
-    </View>
     </>
 
     )   
