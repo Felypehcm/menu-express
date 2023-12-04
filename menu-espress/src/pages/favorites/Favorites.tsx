@@ -11,10 +11,10 @@ const Favorites = ({ favorites, setFavorites, ShoppingCart, Home }: any) => {
   const navigation = useNavigation();
 
   return (
-
-    favorites.map((prod: any, i: number) => (
-      <>
-        <ScrollView>
+    <>
+    <ScrollView>
+    {favorites.map((prod: any, i: number) => (
+        
           <Card key={i}>
             <Card.Title style={{ fontSize: 22 }}> {prod.name} </Card.Title>
             <Card.Divider />
@@ -22,53 +22,46 @@ const Favorites = ({ favorites, setFavorites, ShoppingCart, Home }: any) => {
             <View style={{ alignItems: 'center' }}>
             </View>
           </Card>
-        </ScrollView>
+        
+    ))}
+    </ScrollView>
+    
+    <View style={{position:'absolute', bottom: 0}}>
+      <View style={{flexDirection:'row', borderRadius: 50, justifyContent: 'space-between', marginHorizontal: 50, marginVertical: 20}}>
+          <Pressable onPress={()=> (navigation.navigate('Home'))} style={{backgroundColor:'#fb4e30',
+                          height: 50,
+                          width: 50,
+                          marginHorizontal:14,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          borderRadius:50}}><Icon name="home" size={30} color="white"></Icon></Pressable>
 
-        <View style={{ position: 'absolute', bottom: 0 }}>
-          <View style={{ flexDirection: 'row', borderRadius: 50, justifyContent: 'space-between', marginHorizontal: 45, marginVertical: 20 }}>
-            <Pressable onPress={() => (navigation.navigate('Home'))} style={{
-              backgroundColor: '#fb4e30',
-              height: 50,
-              width: 50,
-              marginHorizontal: 12,
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 50
-            }}><Icon name="home" size={30} color="white"></Icon></Pressable>
+          <Pressable  onPress={()=> (navigation.navigate('ShoppingCart', {shoppingCart}))} style={{backgroundColor:'#fb4e30',
+                          height: 50,
+                          width: 50,
+                          marginHorizontal:14,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          borderRadius:50}}><Icon name="shoppingcart" size={30} color="white"></Icon></Pressable>
 
-            <Pressable onPress={() => (navigation.navigate('ShoppingCart', { shoppingCart }))} style={{
-              backgroundColor: '#fb4e30',
-              height: 50,
-              width: 50,
-              marginHorizontal: 12,
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 50
-            }}><Icon name="shoppingcart" size={30} color="white"></Icon></Pressable>
+          <Pressable style={{backgroundColor:'#fb4e30',
+                          height: 50,
+                          width: 50,
+                          marginHorizontal:14,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          borderRadius: 50}}><Icon name="heart" size={30} color="white"></Icon></Pressable>
 
-            <Pressable style={{
-              backgroundColor: '#fb4e30',
-              height: 50,
-              width: 50,
-              marginHorizontal: 12,
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 50
-            }}><Icon name="heart" size={30} color="white"></Icon></Pressable>
-
-            <Pressable style={{
-              backgroundColor: '#fb4e30',
-              height: 50,
-              width: 50,
-              marginHorizontal: 12,
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 50
-            }}><Icon name="profile" size={30} color="white" /></Pressable>
-          </View>
-        </View>
-      </>
-    ))
+          <Pressable style={{backgroundColor:'#fb4e30',
+                          height: 50,
+                          width: 50,
+                          marginHorizontal:14,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          borderRadius: 50}}><Icon name="profile" size={30} color="white"/></Pressable>
+      </View>
+    </View>
+    </>
   )
 }
 export default Favorites
