@@ -128,8 +128,8 @@ const ShoppingCart = ({route}: any) => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         borderRadius: 50}}><Icon name="profile" size={30} color="white"/></Pressable>
+      </View>
     </View>
-  </View>
     </>
 
     )   

@@ -44,6 +44,13 @@ const Home = ({navigation, shoppingCart, setShoppingCart, favorites, setFavorite
   const openToast = (message: string) => {
     ToastAndroid.show(message, 3000)
   }
+  const remuveFavorite = (product: any) => {
+    for(let i =0; favorites.lenght; i++) {
+      if(favorites[i] === product.name) {
+        delete favorites[i]
+      }
+    }
+  }
   const openChat = () => {
     navigation.navigate('Chat')
   }
@@ -77,8 +84,8 @@ const Home = ({navigation, shoppingCart, setShoppingCart, favorites, setFavorite
                   <Text style={{fontSize: 20, marginEnd: "5%", marginBottom: "10%", marginTop: "3%"}}> Preço: {product.price} </Text>
                   {
                     favorite ? 
-                    <Icon onPress={() => (setFavorite(false))} name="heart" size={28} color="red"></Icon>:
-                    <Icon onPress={() => (setFavorite(true))} name="hearto" size={28}></Icon>
+                    <Icon onPress={() => {remuveFavorite(product), setFavorite(false)}} name="heart" size={28} color="red"></Icon>:
+                    <Icon onPress={() => {setFavorites([...favorites, product]), setFavorite(true)}} name="hearto" size={28}></Icon>
                   }
                   {/*<Button onPress={() => {
                     setShoppingCart([...shoppingCart, product])
