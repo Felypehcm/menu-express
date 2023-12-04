@@ -1,7 +1,6 @@
 import { useState, useEffect }from "react";
 import { Text, ScrollView, Pressable, ToastAndroid, View } from "react-native"
 import { Card } from 'react-native-elements'
-import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native';
 
