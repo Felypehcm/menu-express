@@ -4,9 +4,10 @@ import { Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native';
 
-const Orders = ({route}: any) => {
+const Orders = () => {
   const navigation = useNavigation();
-  const{ orders } = route.params
+  //const{ orders } = route.params
+  const [orders, setOrders] = useState([])
     const openToast = (message: string) => {
         ToastAndroid.show(message, 3000)
       }
@@ -44,7 +45,7 @@ const Orders = ({route}: any) => {
                         alignItems: 'center',
                         borderRadius:50}}><Icon name="home" size={30} color="white"></Icon></Pressable>
 
-        <Pressable   style={{backgroundColor:'#fb4e30',
+        <Pressable  onPress={()=> (navigation.navigate('ShoppingCart'))} style={{backgroundColor:'#fb4e30',
                         height: 50,
                         width: 50,
                         marginHorizontal:12,

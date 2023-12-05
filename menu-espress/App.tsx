@@ -12,8 +12,6 @@ import  IconTop  from 'react-native-vector-icons/AntDesign';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { useState } from 'react';
-import { Header } from 'react-native-elements';
-
 
 
 const App = (): JSX.Element => {
@@ -37,7 +35,7 @@ const App = (): JSX.Element => {
         }} name="Home">
           {
             ({navigation}) => (
-              <Home navigation={navigation} shoppingCart={shoppingCart} setShoppingCart={setShoppingCart} favotites={favorites} setFavorite={setFavorites} ></Home>
+              <Home navigation={navigation} shoppingCart={shoppingCart} setShoppingCart={setShoppingCart} favorites={favorites} setFavorites={setFavorites} ></Home>
             )
           }
         </Stack.Screen>
@@ -47,7 +45,7 @@ const App = (): JSX.Element => {
         <Stack.Screen options={{headerTitleAlign: 'center'}} name="Chat" component={Chat}></Stack.Screen>
         <Stack.Screen options={{headerTitleAlign: 'center', title:'Favoritos'}} name="Favorites">
         {
-            () => (<Favorites favorites={favorites} setFavorites={setFavorites}></Favorites>)
+            () => (<Favorites favorites={favorites} setFavorites={setFavorites} shoppingCart={shoppingCart} setShoppingCart={setShoppingCart}></Favorites>)
         }
         </Stack.Screen>
       </Stack.Navigator>

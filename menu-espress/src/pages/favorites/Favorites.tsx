@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 
 
-const Favorites = ({ favorites, setFavorites, ShoppingCart, Home }: any) => {
+const Favorites = ({ favorites, setFavorites, shoppingCart, Home, Orders }: any) => {
 
   const navigation = useNavigation();
 
@@ -36,7 +36,7 @@ const Favorites = ({ favorites, setFavorites, ShoppingCart, Home }: any) => {
                           alignItems: 'center',
                           borderRadius:50}}><Icon name="home" size={30} color="white"></Icon></Pressable>
 
-          <Pressable  onPress={()=> (navigation.navigate('ShoppingCart', {shoppingCart}))} style={{backgroundColor:'#fb4e30',
+          <Pressable  onPress={()=> navigation.navigate('ShoppingCart', {shoppingCart})} style={{backgroundColor:'#fb4e30',
                           height: 50,
                           width: 50,
                           marginHorizontal:14,
@@ -52,7 +52,7 @@ const Favorites = ({ favorites, setFavorites, ShoppingCart, Home }: any) => {
                           alignItems: 'center',
                           borderRadius: 50}}><Icon name="heart" size={30} color="white"></Icon></Pressable>
 
-          <Pressable style={{backgroundColor:'#fb4e30',
+          <Pressable onPress={()=> (navigation.navigate('Orders', {Orders}))} style={{backgroundColor:'#fb4e30',
                           height: 50,
                           width: 50,
                           marginHorizontal:14,
