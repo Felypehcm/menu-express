@@ -40,8 +40,12 @@ const Profile = ({ navigation }: any) => {
     }
   };
 
+  const goTopage = (path: string) => {
+    navigation.navigate(path)
+  }
+
   const changePassword = () => {
-    // Lógica para mudar a senha
+    goTopage('forgotPassword')
   };
 
   const handlePickerImage = async () => {
@@ -63,12 +67,11 @@ const Profile = ({ navigation }: any) => {
       if (canceled) {
         ToastAndroid.show('Operação cancelada', ToastAndroid.SHORT);
       } else {
-        // Lógica para lidar com a imagem selecionada
-        const selectedImageUri = assets.length > 0 ? assets[0].uri : null;
+        const selectedImage = assets && assets.length > 0 ? assets[0] : null;
   
-        if (selectedImageUri) {
+        if (selectedImage) {
           // Salvar a imagem no banco de dados
-          saveImageToDatabase(selectedImageUri);
+          saveImageToDatabase(selectedImage.uri);
         }
       }
     }
@@ -76,17 +79,25 @@ const Profile = ({ navigation }: any) => {
 
   const saveImageToDatabase = async (imageUri: string) => {
     try {
+      const formData = new FormData();
+      formData.append('avatar', imageUri);
+      formData.append('email', userEmail || '');
+  
       // Chame sua API ou lógica de banco de dados aqui para salvar a URI da imagem
-      const response = await axios.post('http://localhost:8080/api/user/uploadAvatar', { imageUri });
-
+      const response = await axios.post('http://192.168.0.13:8080/api/user/uploadAvatar', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  
       // Verifique a resposta do servidor e tome as medidas apropriadas
       if (response.status === 200) {
         // Atualize o estado ou faça o que for necessário
         setUserProfileImage(imageUri);
-
+  
         // Salve a URI da imagem no AsyncStorage ou no estado, conforme necessário
         AsyncStorage.setItem('userProfileImage', imageUri);
-
+  
         ToastAndroid.show('Imagem salva com sucesso', ToastAndroid.SHORT);
       } else {
         ToastAndroid.show('Erro ao salvar imagem', ToastAndroid.SHORT);

@@ -1,6 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-const BASE_URL = 'http://192.168.0.2:8080/api';
+const BASE_URL = 'http://10.5.7.172:8080/api';
 
 const httpService = {
   login: async (email: string, password: string) => {
@@ -33,6 +31,23 @@ const httpService = {
       return response;
     } catch (error) {
       console.error('Erro ao fazer a solicitação de cadastro:', error);
+      throw error;
+    };
+  },
+
+  updatePassword: async (email: string, password: string, newPassword: string) => {
+    try {
+      const response = await fetch(`${BASE_URL}/user/updatePassword`, {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password, newPassword }),
+      });
+      return response;
+    } catch (error) {
+      console.error('Erro ao atualizar a senha:', error);
       throw error;
     };
   }
