@@ -7,6 +7,7 @@ import ShoppingCart from './src/pages/shoppingCart/ShoppingCart';
 import Favorites from './src/pages/favorites/Favorites';
 import Chat from './src/pages/Chat/chat';
 import Profile from './src/pages/Profile/Profile';
+import Orders from './src/pages/Orders/Orders';
 import  IconTop  from 'react-native-vector-icons/AntDesign';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -40,7 +41,8 @@ const App = (): JSX.Element => {
             )
           }
         </Stack.Screen>
-        <Stack.Screen name="Profile" component={Profile} options={{title: 'Profile'}}></Stack.Screen>
+        <Stack.Screen name="Orders" component={Orders} options={{title: 'Orders'}}></Stack.Screen>
+        <Stack.Screen name="Profile" component={Profile} options={{title: 'Perfil'}}></Stack.Screen>
         <Stack.Screen name="ShoppingCart" component={ShoppingCart} options={{title: 'Carrinho'}}></Stack.Screen>
         <Stack.Screen options={{headerTitleAlign: 'center'}} name="Chat" component={Chat}></Stack.Screen>
         <Stack.Screen options={{headerTitleAlign: 'center', title:'Favoritos'}} name="Favorites">

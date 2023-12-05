@@ -11,11 +11,13 @@ const Orders = ({route}: any) => {
         ToastAndroid.show(message, 3000)
       }
     
+    //const [orders, setOrders] = useState([...cartItems]);  
+    
     return (
       <>
         <ScrollView>
             <Text>Lista de seus Pedidos:</Text>
-      {cartItems.map((prod: any, i: number) => (
+      {/* {cartItems.map((prod: any, i: number) => (
         <Card key={i}>
           <Card.Title style={{ fontSize: 22 }}> {prod.name} </Card.Title>
           <Card.Divider />
@@ -26,7 +28,7 @@ const Orders = ({route}: any) => {
             </Text>
           </View>
         </Card>
-      ))}
+      ))} */}
     </ScrollView>
     
     <View style={{position:'absolute', bottom: 0}}>
@@ -39,7 +41,7 @@ const Orders = ({route}: any) => {
                         alignItems: 'center',
                         borderRadius:50}}><Icon name="home" size={30} color="white"></Icon></Pressable>
 
-        <Pressable   style={{backgroundColor:'#fb4e30',
+        <Pressable  onPress={()=> (navigation.navigate('ShoppingCart'))} style={{backgroundColor:'#fb4e30',
                         height: 50,
                         width: 50,
                         marginHorizontal:12,
