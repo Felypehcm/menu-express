@@ -6,29 +6,32 @@ import { useNavigation } from '@react-navigation/native';
 
 const Orders = ({route}: any) => {
   const navigation = useNavigation();
-    const{cartItems} = route.params
+  const{ orders } = route.params
     const openToast = (message: string) => {
         ToastAndroid.show(message, 3000)
       }
-    
-    //const [orders, setOrders] = useState([...cartItems]);  
-    
+      
     return (
       <>
-        <ScrollView>
+        <ScrollView style={{ marginBottom: 80}}>
             <Text>Lista de seus Pedidos:</Text>
-      {/* {cartItems.map((prod: any, i: number) => (
-        <Card key={i}>
-          <Card.Title style={{ fontSize: 22 }}> {prod.name} </Card.Title>
-          <Card.Divider />
-          <Card.Image source={{ uri: prod.image }} />
-          <View style={{ alignItems: 'center' }}>
-            <Text style={{ fontSize: 16, margin: 8 }}>
-              Preço: {prod.price * prod.quantity}
-            </Text>
-          </View>
+      {orders.map((order: any, index: number) => (
+        <Card key={index}  style={{ alignItems: 'center'}}>
+          <Text style={{ fontSize: 22 }}> Pedido: {index + 1} </Text>
+              {order.products.map((prod: any, productIndex: number) => ( 
+                  <View key={productIndex}>
+                    <View style={{ alignItems: 'center' }}>
+                      <Text style={{ fontSize: 16, margin: 8}}>
+                        Produto: {prod.name}  Quantidade: {prod.quantity} Preço: R${(prod.price * prod.quantity).toFixed(2)}
+                      </Text>
+                    </View>
+                  </View>
+              ))} 
+              <Text style={{ fontSize: 16, margin: 8 }}>
+              Total: R${order.total.toFixed(2)}
+              </Text>
         </Card>
-      ))} */}
+      ))}
     </ScrollView>
     
     <View style={{position:'absolute', bottom: 0}}>

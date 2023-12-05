@@ -4,9 +4,11 @@ import { Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native';
 
-const ShoppingCart = ({route, orders}: any) => {
+
+const ShoppingCart = ({route}: any) => {
   const navigation = useNavigation();
-    const{shoppingCart} = route.params
+  const [orders, setOrders] = useState([]); 
+    const{shoppingCart, setShoppingCart} = route.params
     const openToast = (message: string) => {
         ToastAndroid.show(message, 3000)
       }
@@ -49,6 +51,23 @@ const ShoppingCart = ({route, orders}: any) => {
       const updatedCart = [...cartItems];
       updatedCart[index].quantity += 1;
       setCartItems(updatedCart);
+    };
+
+
+
+    const addOrder = () => {
+   
+
+      const newOrder = {
+        products: cartItems.map(item => ({ ...item })), 
+        total: cartItems.reduce((total, item) => total + item.price * item.quantity, 0),
+      };
+
+
+      const updatedOrders = [...orders, newOrder];
+
+
+      setOrders(updatedOrders);
     };
     
     return (
@@ -117,9 +136,12 @@ const ShoppingCart = ({route, orders}: any) => {
             paddingHorizontal: 16,
             paddingVertical: 20,
           }}>
-          <Text style={{ fontSize: 18, color: 'black' }}>Valor Total: {totalToPay.toFixed(2)}</Text>
+          <Text style={{ fontSize: 18, color: 'black' }}>Valor Total: R${totalToPay.toFixed(2)}</Text>
           <Pressable
-            onPress={()=> (navigation.navigate('Orders', {orders}))}
+            onPress = {()=> {
+              addOrder()
+              navigation.navigate('Orders', { orders: orders })
+            }}
             style={({ pressed }: any) => ({
               backgroundColor: pressed ? '#2089dc' : '#fb4e30',
               height: 40,
