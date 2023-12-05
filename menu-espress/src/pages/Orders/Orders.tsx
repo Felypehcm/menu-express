@@ -1,15 +1,19 @@
 import { useState, useEffect }from "react";
-import { Text, ScrollView, Pressable, ToastAndroid, View } from "react-native"
+import { Text, ScrollView, Pressable, View } from "react-native"
 import { Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 
 const Orders = () => {
   const navigation = useNavigation();
   //const{ orders } = route.params
   const [orders, setOrders] = useState([])
     const openToast = (message: string) => {
-        ToastAndroid.show(message, 3000)
+        Toast.show({
+          type: 'success',
+          text1: message
+        });
       }
       
     return (

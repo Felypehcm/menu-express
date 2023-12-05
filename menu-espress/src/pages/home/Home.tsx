@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useEffect, useState } from 'react'
-import { Pressable, ScrollView, Text, ToastAndroid, View } from 'react-native'
+import { Pressable, ScrollView, Text, View } from 'react-native'
 import { Button, Card } from 'react-native-elements'
 import {FAB} from '@rneui/themed';
 import Icon from 'react-native-vector-icons/AntDesign'
 import Style from './HomeStyle'
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Toast from 'react-native-toast-message';
 
 const productsSanduiches = [
   {name: "X Bacon", price: 32, quantity: 0, description: "X Bacon", image: "https://embutidosbonatti.ind.br/temp/BIN_57_V9Fb0BwK.jpg"},
@@ -43,7 +44,10 @@ const productsBebidas = [
 
 const Home = ({navigation, shoppingCart, setShoppingCart, favorites, setFavorites, orders}: any) => {
   const openToast = (message: string) => {
-    ToastAndroid.show(message, 3000)
+    Toast.show({
+      type: 'success',
+      text1: message
+    });
   }
   const remuveFavorite = (product: any) => {
     const filteredFavorites = favorites.filter((favorite: any) => {

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, Pressable, Alert, ToastAndroid } from 'react-native';
+import { View, Text, Image, Pressable, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios'; // Certifique-se de ter o axios instalado
+import Toast from 'react-native-toast-message';
 
 import styles from './ProfileStyle';
 
@@ -65,7 +66,10 @@ const Profile = ({ navigation }: any) => {
       });
   
       if (canceled) {
-        ToastAndroid.show('Operação cancelada', ToastAndroid.SHORT);
+        Toast.show({
+          type: 'success',
+          text1: 'Operação cancelada'
+        });
       } else {
         const selectedImage = assets && assets.length > 0 ? assets[0] : null;
   
@@ -96,15 +100,23 @@ const Profile = ({ navigation }: any) => {
         setUserProfileImage(imageUri);
   
         // Salve a URI da imagem no AsyncStorage ou no estado, conforme necessário
-        AsyncStorage.setItem('userProfileImage', imageUri);
-  
-        ToastAndroid.show('Imagem salva com sucesso', ToastAndroid.SHORT);
+        AsyncStorage.setItem('userProfileImage', imageUri);  
+        Toast.show({
+          type: 'success',
+          text1: 'Imagem salva com sucesso'
+        });
       } else {
-        ToastAndroid.show('Erro ao salvar imagem', ToastAndroid.SHORT);
+        Toast.show({
+          type: 'error',
+          text1: 'Erro ao salvar imagem'
+        });
       }
     } catch (error) {
       console.error('Erro ao salvar imagem no banco de dados:', error);
-      ToastAndroid.show('Erro ao salvar imagem', ToastAndroid.SHORT);
+      Toast.show({
+        type: 'error',
+        text1: 'Erro ao salvar imagem'
+      });
     }
   };
 

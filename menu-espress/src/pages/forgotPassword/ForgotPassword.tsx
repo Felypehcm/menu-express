@@ -1,9 +1,11 @@
-import { Button, Text, TextInput, View, Image, ImageBackground, ScrollView, KeyboardAvoidingView, Platform, ToastAndroid } from 'react-native'
+import { Button, Text, TextInput, View, Image, ImageBackground, ScrollView, KeyboardAvoidingView, Platform } from 'react-native'
 import styles from '../login/LoginStyle'
 import React, { useState, useEffect } from 'react';
 import httpService from '../../httpService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import storageService from '../../storageService';
+import Toast from 'react-native-toast-message';
+
 
 const imgbg='./bg.png'
 
@@ -38,9 +40,15 @@ const ForgotPassword = ({navigation}: any) => {
       try {
         storageService.set('userData', JSON.stringify(data));
         goTopage('Login');
-        ToastAndroid.show(data.message, 5000);
+        Toast.show({
+          type: 'success',
+          text1: data.message
+        });
       } catch (e) {
-        ToastAndroid.show('Não foi possível logar no sistema. Tente novamente mais tarde!', 5000)
+        Toast.show({
+          type: 'error',
+          text1: 'Não foi possível logar no sistema. Tente novamente mais tarde!'
+        });
       }  
     }
   }
