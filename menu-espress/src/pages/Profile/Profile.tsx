@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, Button, Pressable, StyleSheet } from 'react-native';
+import { launchImageLibrary, ImageLibraryOptions, ImagePickerResponse } from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './ProfileStyle';
 
@@ -34,21 +35,53 @@ const Profile = ({ navigation }: any) => {
     // Lógica para mudar a senha
   };
 
+  const selectImage = () => {
+    const options: ImageLibraryOptions = {
+      mediaType: 'photo',
+      includeBase64: false,
+      maxHeight: 200,
+      maxWidth: 200,
+    };
+  
+    launchImageLibrary(options as ImageLibraryOptions, (response) => {
+      if (response.didCancel) {
+        console.log('Usuário cancelou a escolha da imagem');
+      } else if (response.errorMessage) {
+        console.error('Erro ao escolher a imagem:', response.errorMessage);
+      } else {
+        const imageUrl = 'http://localhost:8080/api/user/uploadAvatar';
+        setUserProfileImage(imageUrl);
+        AsyncStorage.setItem('userProfileImage', imageUrl);
+      }
+    });
+  };
+
   return (
     <View style={styles.container}>
-      {userProfileImage && (
-        <Image style={styles.profileImage} source={{ uri: userProfileImage }} />
-      )}
-      <Text style={styles.text}>Nome: {userName}</Text>
-      <Text style={styles.text}>Email: {userEmail}</Text>
+      <View style={styles.container2}>
+        <Pressable onPress={selectImage}>
+          {userProfileImage ? (
+            <Image style={styles.profileImage} source={{ uri: userProfileImage }} />
+          ) : (
+            <View style={styles.profileImagePlaceholder}>
+              <Text style={styles.profileImageText}>Adicionar Foto</Text>
+            </View>
+          )}
+        </Pressable>
+        <View style={styles.textView}>
+          <Text style={styles.text}>Nome: {userName}</Text>
+          <Text style={styles.text}>Email: {userEmail}</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Pressable onPress={changePassword} style={styles.button}>
+            <Text style={styles.buttonText}>Mudar Senha</Text>
+          </Pressable>
 
-      <Pressable onPress={changePassword} style={styles.button}>
-        <Text style={styles.buttonText}>Mudar Senha</Text>
-      </Pressable>
-
-      <Pressable onPress={logout} style={styles.button}>
-        <Text style={styles.buttonText}>Sair do Aplicativo</Text>
-      </Pressable>
+          <Pressable onPress={logout} style={styles.button}>
+            <Text style={styles.buttonText}>Sair do Aplicativo</Text>
+          </Pressable>
+        </View>
+      </View>
     </View>
   );
 };

@@ -33,6 +33,12 @@ const CreateAccount = ({ navigation }: any) => {
       return;
     }
 
+    // Só se cadastra se o checkbox tiver marcado
+    if (!isSelected) {
+      console.error('Você deve aceitar os termos de uso para se cadastrar.');
+      return;
+    }
+
     try {
       const result = await httpService.signup(name, email, password);
 
