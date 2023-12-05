@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const BASE_URL = 'http://192.168.1.145:8080/api';
+const BASE_URL = 'http://10.5.7.117:8080/api';
 
 const httpService = {
   login: async (email: string, password: string) => {
