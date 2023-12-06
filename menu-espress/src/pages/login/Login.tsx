@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Text, TextInput, View, Image, ImageBackground, KeyboardAvoidingView, ScrollView, Platform, Alert, ToastAndroid } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Button, Text, TextInput, View, Image, ImageBackground, KeyboardAvoidingView, ScrollView, Platform, Alert } from 'react-native';
 import styles from './LoginStyle';
 import httpService from '../../httpService';
 import storageService from '../../storageService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast from 'react-native-toast-message';
 
 const imgbg = './bg.png';
 
@@ -23,10 +23,16 @@ const Login = ({ navigation }: any) => {
         await AsyncStorage.setItem('userName', data.name);
         await AsyncStorage.setItem('userEmail', data.email);
         // await AsyncStorage.setItem('', data.avatar);
-        goTopage('Home');
-        ToastAndroid.show(data.message, 5000);
+        Toast.show({
+          type: 'success',
+          text1: 'Usuário logado com sucesso'
+        });
+         goTopage('Home')
       } catch (e) {
-        ToastAndroid.show('Não foi possível logar no sistema. Tente novamente mais tarde!', 5000)
+        Toast.show({
+          type: 'error',
+          text1: 'Não foi possível logar no sistema. Tente novamente mais tarde!'
+        });
       }
     } 
 
@@ -56,7 +62,10 @@ const Login = ({ navigation }: any) => {
     }
     
     else {
-      ToastAndroid.show(data.message, 5000);
+      Toast.show({
+        type: 'error',
+        text1: data.message
+      });
     }
   }
 
@@ -65,6 +74,7 @@ const Login = ({ navigation }: any) => {
   };
 
   return (
+  <>
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={10} style={styles.container}>
       <ScrollView style={{ width: '100%' }}>
         <View style={styles.container}>
@@ -107,6 +117,7 @@ const Login = ({ navigation }: any) => {
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
+  </>
   );
 };
 
