@@ -35,11 +35,17 @@ const App = (): JSX.Element => {
         }} name="Home">
           {
             ({navigation}) => (
-              <Home navigation={navigation} shoppingCart={shoppingCart} setShoppingCart={setShoppingCart} favorites={favorites} setFavorites={setFavorites} ></Home>
+              <Home navigation={navigation} 
+              shoppingCart={shoppingCart} setShoppingCart={setShoppingCart} 
+              favorites={favorites} setFavorites={setFavorites}></Home>
             )
           }
         </Stack.Screen>
-        <Stack.Screen name="Orders" component={Orders} options={{title: 'Orders'}}></Stack.Screen>
+        <Stack.Screen name="Orders" options={{title: 'Orders'}}>
+        {
+            () => (<Orders shoppingCart={shoppingCart} favorites={favorites}></Orders>)
+        }
+        </Stack.Screen>
         <Stack.Screen name="Profile" component={Profile} options={{title: 'Perfil'}}></Stack.Screen>
         <Stack.Screen name="ShoppingCart" component={ShoppingCart} options={{title: 'Carrinho'}}></Stack.Screen>
         <Stack.Screen options={{headerTitleAlign: 'center'}} name="Chat" component={Chat}></Stack.Screen>

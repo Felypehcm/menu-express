@@ -98,8 +98,7 @@ const Home = ({navigation, shoppingCart, setShoppingCart, favorites, setFavorite
                     favorite ? 
                     <Icon onPress={() => {remuveFavorite(product), setFavorite(false)}} name="heart" size={28} color="red"></Icon>:
                     <Icon onPress={() => {                      
-                      if(favorites) {
-                        setFavorites([...favorites, product])
+                      if(favorites) {setFavorites([...favorites, product])
                       } else {
                         setFavorites([product])
                       }
@@ -139,7 +138,7 @@ const Home = ({navigation, shoppingCart, setShoppingCart, favorites, setFavorite
               </Card>
             )
           })
-        }
+          }
         </ScrollView>
 
 {/* --------------------ESTA PARTE REPRESENTA A SESSÃO DE Combos --------------------*/}
