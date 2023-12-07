@@ -1,4 +1,4 @@
-const BASE_URL = 'http://192.168.1.145:8080/api';
+const BASE_URL = 'http://10.5.3.127:8080/api';
 
 const httpService = {
   
