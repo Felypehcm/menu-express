@@ -1,5 +1,7 @@
-const BASE_URL = 'http://10.5.7.212:8080/api';
+const BASE_URL = 'http://192.168.1.7:8080/api';
+
 const httpService = {
+  
   login: async (email: string, password: string) => {
     try {
       const response = await fetch(`${BASE_URL}/auth/login`, {

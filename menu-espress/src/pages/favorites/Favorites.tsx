@@ -10,6 +10,13 @@ const Favorites = ({ favorites, setFavorites, shoppingCart, Home, Orders }: any)
 
   const navigation = useNavigation();
 
+  const remuveFavorite = (product: any) => {
+    const filteredFavorites = favorites.filter((favorite: any) => {
+      return favorite.name !== product.name
+    })
+    setFavorites(filteredFavorites)
+  }
+
   return (
     <>
     <ScrollView>
@@ -20,6 +27,8 @@ const Favorites = ({ favorites, setFavorites, shoppingCart, Home, Orders }: any)
             <Card.Divider />
             <Card.Image source={{ uri: prod.image }} />
             <View style={{ alignItems: 'center' }}>
+
+              
             </View>
           </Card>
         

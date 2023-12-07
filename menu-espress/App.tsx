@@ -12,6 +12,7 @@ import  IconTop  from 'react-native-vector-icons/AntDesign';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { useState } from 'react';
+import Toast from 'react-native-toast-message';
 
 
 const App = (): JSX.Element => {
@@ -19,7 +20,8 @@ const App = (): JSX.Element => {
   const [shoppingCart, setShoppingCart] = useState([])
   const [favorites, setFavorites] = useState([])
   return (
-    <NavigationContainer>
+    <>
+        <NavigationContainer>
       <Stack.Navigator>
       <Stack.Screen options={{headerShown: false}} name="Login" component={Login} ></Stack.Screen>
         <Stack.Screen  options={{headerShown: false}} name="login" component={login}></Stack.Screen>
@@ -35,11 +37,17 @@ const App = (): JSX.Element => {
         }} name="Home">
           {
             ({navigation}) => (
-              <Home navigation={navigation} shoppingCart={shoppingCart} setShoppingCart={setShoppingCart} favorites={favorites} setFavorites={setFavorites} ></Home>
+              <Home navigation={navigation} 
+              shoppingCart={shoppingCart} setShoppingCart={setShoppingCart} 
+              favorites={favorites} setFavorites={setFavorites}></Home>
             )
           }
         </Stack.Screen>
-        <Stack.Screen name="Orders" component={Orders} options={{title: 'Orders'}}></Stack.Screen>
+        <Stack.Screen name="Orders" options={{title: 'Orders'}}>
+        {
+            () => (<Orders shoppingCart={shoppingCart} favorites={favorites}></Orders>)
+        }
+        </Stack.Screen>
         <Stack.Screen name="Profile" component={Profile} options={{title: 'Perfil'}}></Stack.Screen>
         <Stack.Screen name="ShoppingCart" component={ShoppingCart} options={{title: 'Carrinho'}}></Stack.Screen>
         <Stack.Screen options={{headerTitleAlign: 'center'}} name="Chat" component={Chat}></Stack.Screen>
@@ -50,7 +58,10 @@ const App = (): JSX.Element => {
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
+  
+
+      < Toast />
+    </>
   );
 }
-
 export default App

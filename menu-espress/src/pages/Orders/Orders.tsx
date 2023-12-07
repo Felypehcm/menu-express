@@ -1,15 +1,18 @@
 import { useState, useEffect }from "react";
-import { Text, ScrollView, Pressable, ToastAndroid, View } from "react-native"
+import { Text, ScrollView, Pressable, View } from "react-native"
 import { Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 
-const Orders = () => {
+const Orders = ({favorites, shoppingCart} : any) => {
   const navigation = useNavigation();
-  //const{ orders } = route.params
   const [orders, setOrders] = useState([])
     const openToast = (message: string) => {
-        ToastAndroid.show(message, 3000)
+        Toast.show({
+          type: 'success',
+          text1: message
+        });
       }
       
     return (
@@ -45,7 +48,7 @@ const Orders = () => {
                         alignItems: 'center',
                         borderRadius:50}}><Icon name="home" size={30} color="white"></Icon></Pressable>
 
-        <Pressable  onPress={()=> (navigation.navigate('ShoppingCart'))} style={{backgroundColor:'#fb4e30',
+        <Pressable  onPress={()=> (navigation.navigate('ShoppingCart', {shoppingCart}))} style={{backgroundColor:'#fb4e30',
                         height: 50,
                         width: 50,
                         marginHorizontal:12,
@@ -53,7 +56,7 @@ const Orders = () => {
                         alignItems: 'center',
                         borderRadius:50}}><Icon name="shoppingcart" size={30} color="white"></Icon></Pressable>
 
-        <Pressable onPress={()=> (navigation.navigate('Favorites'))} style={{backgroundColor:'#fb4e30',
+        <Pressable onPress={()=> (navigation.navigate('Favorites', {favorites}))} style={{backgroundColor:'#fb4e30',
                         height: 50,
                         width: 50,
                         marginHorizontal:12,
