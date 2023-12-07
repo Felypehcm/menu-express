@@ -1,4 +1,4 @@
-const BASE_URL = 'http://10.5.7.172:8080/api';
+const BASE_URL = 'http://10.5.7.212:8080/api';
 const httpService = {
   login: async (email: string, password: string) => {
     try {
