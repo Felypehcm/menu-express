@@ -26,10 +26,7 @@ const Favorites = ({ favorites, setFavorites, shoppingCart, Home, Orders }: any)
             <Card.Title style={{ fontSize: 22 }}> {prod.name} </Card.Title>
             <Card.Divider />
             <Card.Image source={{ uri: prod.image }} />
-            <View style={{ alignItems: 'center' }}>
-
-              
-            </View>
+            <View style={{ alignItems: 'center' }}></View>
           </Card>
         
     ))}
