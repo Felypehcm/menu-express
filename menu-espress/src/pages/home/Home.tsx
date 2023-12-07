@@ -61,17 +61,6 @@ const Home = ({navigation, shoppingCart, setShoppingCart, favorites, setFavorite
     navigation.navigate('Chat')
   }
 
-  const [userProfileImage, setUserProfileImage] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchUserProfileImage = async () => {
-      // Pega a url do perfil do MONGO
-      const profileImage = await AsyncStorage.getItem('userProfileImage');
-      setUserProfileImage(profileImage);
-    };
-
-    fetchUserProfileImage();
-  }, []);
 
   return (
     <>
