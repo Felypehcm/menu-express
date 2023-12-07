@@ -1,4 +1,4 @@
-const BASE_URL = 'http://192.168.1.7:8080/api';
+const BASE_URL = 'http://192.168.0.13:8080/api';
 
 const httpService = {
   
@@ -52,22 +52,21 @@ const httpService = {
       throw error;
     };
   },
-  getLancheHome: async (productType: string) => {
+
+  getLancheHome: async (product: string)  => {
     try {
-      const response = await fetch(`${BASE_URL}/product/findByType/:typeProduct`, {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({productType}),
-      });
-      return response;
+        const response = await fetch(`${BASE_URL}/product/findByType/${encodeURIComponent(product)}`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json'},
+        });
+        if (response) {
+            const data = await response.json();
+            return data;
+        }
     } catch (error) {
-      console.error('Erro ao exibir os lanches:', error);
-      throw error;
-    };
-  },
+        console.error('Erro na busca por produto', error);
+    }
+  }
 };
 
 export default httpService;
