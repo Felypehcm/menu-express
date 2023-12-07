@@ -88,7 +88,7 @@ const Profile = ({ navigation }: any) => {
       formData.append('email', userEmail || '');
   
       // Chame sua API ou lógica de banco de dados aqui para salvar a URI da imagem
-      const response = await axios.post('http://192.168.0.13:8080/api/user/uploadAvatar', formData, {
+      const response = await axios.post('http://10.5.7.212:8080/api/user/uploadAvatar', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
