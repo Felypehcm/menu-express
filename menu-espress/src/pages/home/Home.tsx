@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import React from 'react'
 import { Pressable, ScrollView, Text, View } from 'react-native'
 import { Button, Card } from 'react-native-elements'
 import {FAB} from '@rneui/themed';
@@ -7,17 +8,18 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import Style from './HomeStyle'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from 'react-native-toast-message';
+import httpService from '../../httpService'
 
 const productsSanduiches = [
-  {name: "X Bacon", price: 32, quantity: 0, description: "X Bacon", image: "https://embutidosbonatti.ind.br/temp/BIN_57_V9Fb0BwK.jpg"},
+  {name: "X Bacon", price: 32.30 , quantity: 0, description: "X Bacon", image: "https://embutidosbonatti.ind.br/temp/BIN_57_V9Fb0BwK.jpg"},
   {name: "X Salad", price: 28, quantity: 0, description: "X Salad", image: "https://d1etmlapode6io.cloudfront.net/images/fidelizze/demofood/items/rsz_ilya-mashkov-mkva2hljgni-unsplash_637260269992723902.jpg"},
-  {name: "X Egg", price: "R$ 28,00", quantity: 0, description: "X Egg", image: "https://www.receiteria.com.br/wp-content/uploads/receitas-de-x-egg-4-730x449.jpg"},
-  {name: "X Calabresa", price: "R$ 28,00", quantity: 0, description: "X Calabresa", image: "https://storage.googleapis.com/domain-images/bd77a99c-250c-464d-816b-e8f862fd1122/products/gallery_301e217e-7a0f-456a-9db5-fe871ace1f09.jpg"},
-  {name: "X Frango", price: "R$ 30,00", quantity: 0, description: "X Frango", image: "https://looklanches.com.br/wp-content/uploads/2020/09/x-frango-tudo.jpg"},
-  {name: "Cachorro Quente", price: "R$ 15,00", quantity: 0, description: "Cachorro Quente", image: "https://receitinhas.com.br/wp-content/uploads/2022/06/cachorro-quente-tradicional-2.jpg"},
-  {name: "Sanduiche de Mortadela", price: "R$ 30,00", quantity: 0, description: "Sanduiche de Mortadela", image: "https://www.fmetropolitana.com.br/wp-content/uploads/2023/01/Brazuca-Marba-e-Mortadela-Brasil.jpg"},
-  {name: "Duplo Smash", price: "R$ 32,00", quantity: 0, description: "Duplo Smash", image: "https://i.pinimg.com/736x/7d/55/ba/7d55ba09657e63902cc7e5afcf9a1e7a.jpg"},
-  {name: "Bauru", price: "R$ 34,00", quantity: 0, description: "Bauru", image: "https://i0.statig.com.br/bancodeimagens/2r/5g/l7/2r5gl73lyxqlpxwoodysu86q5.jpg"}
+  {name: "X Egg", price: 28, quantity: 0, description: "X Egg", image: "https://www.receiteria.com.br/wp-content/uploads/receitas-de-x-egg-4-730x449.jpg"},
+  {name: "X Calabresa", price: 28, quantity: 0, description: "X Calabresa", image: "https://storage.googleapis.com/domain-images/bd77a99c-250c-464d-816b-e8f862fd1122/products/gallery_301e217e-7a0f-456a-9db5-fe871ace1f09.jpg"},
+  {name: "X Frango", price: 28, quantity: 0, description: "X Frango", image: "https://looklanches.com.br/wp-content/uploads/2020/09/x-frango-tudo.jpg"},
+  {name: "Cachorro Quente", price: 28, quantity: 0, description: "Cachorro Quente", image: "https://receitinhas.com.br/wp-content/uploads/2022/06/cachorro-quente-tradicional-2.jpg"},
+  {name: "Sanduiche de Mortadela", price: 28, quantity: 0, description: "Sanduiche de Mortadela", image: "https://www.fmetropolitana.com.br/wp-content/uploads/2023/01/Brazuca-Marba-e-Mortadela-Brasil.jpg"},
+  {name: "Duplo Smash", price: 28, quantity: 0, description: "Duplo Smash", image: "https://i.pinimg.com/736x/7d/55/ba/7d55ba09657e63902cc7e5afcf9a1e7a.jpg"},
+  {name: "Bauru", price: 28, quantity: 0, description: "Bauru", image: "https://i0.statig.com.br/bancodeimagens/2r/5g/l7/2r5gl73lyxqlpxwoodysu86q5.jpg"}
 ]
 
 const productsCombos = [
@@ -91,54 +93,69 @@ const Home = ({navigation, shoppingCart, setShoppingCart, favorites, setFavorite
           {
             productsSanduiches.map((product, i) => {
               const [favorite, setFavorite] = useState(false)
+              // //
+              // const renderizandoLanches = async() => {
+              //   const productType = 'Lanche';
+              //   const lanches = await httpService.getLancheHome(productType);
+                
+              // };
+              // //
               return (
                 <Card key={i}>
-                  <Card.Title style={{fontSize: 30}}> {product.name} </Card.Title>
-                  <Card.Divider/>
-                  <Card.Image source={{uri: product.image}}/>
-                  <Text> Descrição: {product.description} </Text>
-                  <Text style={{fontSize: 20, marginEnd: "5%", marginBottom: "10%", marginTop: "3%"}}> Preço: {product.price} </Text>
-                  {
-                    favorite ? 
-                    <Icon onPress={() => {remuveFavorite(product), setFavorite(false)}} name="heart" size={28} color="red"></Icon>:
-                    <Icon onPress={() => {                      
-                      if(favorites) {setFavorites([...favorites, product])
-                      } else {
-                        setFavorites([product])
-                      }
-                      setFavorite(true)
-                  }} name="hearto" size={28}></Icon>
-                  }
-                  {/*<Button onPress={() => {
-                    setShoppingCart([...shoppingCart, product])
-                  }} title="Adicionar ao Carrinho"></Button>*/}
 
-                <Pressable onPress={() => {
-                  openToast("Item adicionado com sucesso!")
-                  product.quantity+=1;
-                  const existingProduct = shoppingCart.find((item: any) => item.name === product.name);
-                  const emptyProduct = shoppingCart.find((item: any) => item.quantity <= 0);
-                  if (!existingProduct && !emptyProduct){
-                    setShoppingCart([...shoppingCart, product])
-                  }
-                  if (emptyProduct){
-                    const notEmptyProducts = shoppingCart.filter((item: any) => item.quantity > 0);
-                    setShoppingCart(notEmptyProducts)
-                  }
-                }}
-                style={
-                  ({pressed}:any) => (
-                    {
-                      backgroundColor: pressed ? '#2089dc' : '#fb4e30',
-                      height: 40,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      borderRadius: 8
-                    }
-                  )
-                }>
-                  <Text style={{fontSize: 18, color: 'white'}}>Adicionar ao Carrinho</Text>
-                </Pressable>
+                  <View style={{flexDirection:'row'}}>
+
+                    <View style={{width: 120, height: 120}}>
+                      <Card.Image source={{uri: product.image, width: 60, height: 60}}/>
+                    </View>
+
+                    <View style={{margin: 15, width: 200, height: 120, justifyContent: 'space-between'}}>
+                      <Text style={{fontSize: 20, marginBottom: "3%", marginTop: -15, fontWeight:'bold'}}> {product.name} </Text>
+                      <Card.Divider/>
+                      <Text style={{fontSize: 12, paddingBottom: 25}}> Descrição: {product.description} </Text>
+                      <Text style={{fontSize: 16, marginEnd: "5%", marginBottom: "3%", marginTop: "2%"}}> Preço: R$ {product.price.toFixed(2)} </Text>
+                        <View style={{flexDirection:'row', justifyContent: 'space-between', paddingRight: 10}}>
+                        <Pressable onPress={() => {
+                        openToast("Item adicionado com sucesso!")
+                        product.quantity+=1;
+                        const existingProduct = shoppingCart.find((item: any) => item.name === product.name);
+                        const emptyProduct = shoppingCart.find((item: any) => item.quantity <= 0);
+                        if (!existingProduct && !emptyProduct){
+                          setShoppingCart([...shoppingCart, product])
+                        }
+                        if (emptyProduct){
+                          const notEmptyProducts = shoppingCart.filter((item: any) => item.quantity > 0);
+                          setShoppingCart(notEmptyProducts)
+                        }
+                      }}
+                      style={
+                        ({pressed}:any) => (
+                          {
+                            backgroundColor: pressed ? '#2089dc' : '#fb4e30',
+                            height: 32,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            borderRadius: 8,
+                            paddingHorizontal: 10
+                          }
+                        )
+                      }>
+                        <Text style={{fontSize: 14, color: 'white'}}>Adicionar</Text>
+                      </Pressable>
+                      {
+                          favorite ? 
+                          <Icon onPress={() => {remuveFavorite(product), setFavorite(false)}} name="heart" size={28} color="red"></Icon>:
+                          <Icon onPress={() => {                      
+                            if(favorites) {setFavorites([...favorites, product])
+                            } else {
+                              setFavorites([product])
+                            }
+                            setFavorite(true)
+                        }} name="hearto" size={28}></Icon>
+                        }
+                        </View>
+                    </View>
+                </View>
               </Card>
             )
           })
