@@ -99,7 +99,24 @@ const httpService = {
         console.error('Erro na busca por email:', error);
         return {};
     }
-  }
+  },
+  
+  getLancheHome: async (productType: string) => {
+    try {
+      const response = await fetch(`${BASE_URL}/product/findByType/:typeProduct`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({productType}),
+      });
+      return response;
+    } catch (error) {
+      console.error('Erro ao exibir os lanches:', error);
+      throw error;
+    };
+  },
 };
 
 export default httpService;
