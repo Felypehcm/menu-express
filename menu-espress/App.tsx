@@ -13,6 +13,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { useState } from 'react';
 import Toast from 'react-native-toast-message';
+import ProfileIcon from './src/pages/Profile/ProfileIcon';
 
 
 const App = (): JSX.Element => {
@@ -32,7 +33,7 @@ const App = (): JSX.Element => {
             title: 'Início',
             headerBackVisible: false,
               headerTitleAlign: 'center', 
-              headerRight: () => (<IconTop onPress={()=> (navigation.navigate('Profile'))} name="user" size={25}></IconTop>)
+              headerRight: () => <ProfileIcon navigation={navigation} />
             }
         }} name="Home">
           {

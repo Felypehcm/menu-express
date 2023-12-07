@@ -15,14 +15,12 @@ const Login = ({ navigation }: any) => {
   const onSubmit = async () => {
     const result = await httpService.login(email, password);
     const data = await result.json();
-    
     if (result.status === 200) {
       try {
         storageService.set('userData', JSON.stringify(data));
-        // await AsyncStorage.setItem('userToken', data.token);
         await AsyncStorage.setItem('userName', data.name);
         await AsyncStorage.setItem('userEmail', data.email);
-        // await AsyncStorage.setItem('', data.avatar);
+        await AsyncStorage.setItem('userProfileImage', data.avatar ? data.avatar : 'assets/icone-perfil.png');
         Toast.show({
           type: 'success',
           text1: 'Usuário logado com sucesso'
