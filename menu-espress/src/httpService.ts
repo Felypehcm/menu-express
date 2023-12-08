@@ -1,4 +1,4 @@
-const BASE_URL = 'http://10.5.3.127:8080/api';
+const BASE_URL = 'http://192.168.0.13:8080/api';
 
 const httpService = {
   
@@ -53,9 +53,6 @@ const httpService = {
     };
   },
 
-<<<<<<< HEAD
-  getLancheHome: async (product: string)  => {
-=======
   saveImageToDatabase: async (email: string, uri: string) => {
     try {
         const formData = new FormData();
@@ -83,7 +80,7 @@ const httpService = {
     }
   },
 
-  searchByEmail: async (email: string): Promise<{ avatar?: string }> => {
+  searchByEmail: async (email: string) => {
     try {
         const response = await fetch(`${BASE_URL}/user/findByEmail/${encodeURIComponent(email)}`, {
             method: 'GET',
@@ -104,17 +101,15 @@ const httpService = {
     }
   },
   
-  getLancheHome: async (productType: string) => {
->>>>>>> 9eaabc6f4ca19131ac443b981cb86752fa933507
+  getLancheHome: async () => {
     try {
-        const response = await fetch(`${BASE_URL}/product/findByType/${encodeURIComponent(product)}`, {
+        return await fetch(`${BASE_URL}/product/findAll`, {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json'},
+            headers: { 
+              'Content-Type': 'application/json; charset=utf-8',
+            },
+            // body: JSON.stringify({productType: 'Lanche'})
         });
-        if (response) {
-            const data = await response.json();
-            return data;
-        }
     } catch (error) {
         console.error('Erro na busca por produto', error);
     }

@@ -32,6 +32,7 @@ const App = (): JSX.Element => {
           return {
             title: 'Início',
             headerBackVisible: false,
+            gestureEnabled: false,
               headerTitleAlign: 'center', 
               headerRight: () => <ProfileIcon navigation={navigation} />
             }

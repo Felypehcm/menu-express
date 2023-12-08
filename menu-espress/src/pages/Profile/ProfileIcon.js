@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import httpService from '../../httpService';
+import {FontAwesome} from '@expo/vector-icons';
 
 const ProfileIcon = ({ navigation }) => {
   const [userProfileImage, setUserProfileImage] = useState(null);
@@ -31,7 +32,9 @@ const ProfileIcon = ({ navigation }) => {
           source={{ uri: userProfileImage }}
           style={{ width: 40, height: 40, borderRadius: 15 }}
         />
-      ) : null}
+      ) : (
+        <FontAwesome name='user' size={25}/>
+      )}
     </TouchableOpacity>
   );
 };
