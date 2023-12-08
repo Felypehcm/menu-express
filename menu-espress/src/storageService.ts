@@ -10,7 +10,7 @@ const storage = {
         }
     },
     set: async (key: string, value: string) => {
-        await AsyncStorage.setItem(key, value)
+        await AsyncStorage.setItem(key, JSON.stringify(value))
     }
 }
 

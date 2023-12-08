@@ -36,34 +36,36 @@ const styles = StyleSheet.create({
     },
 })
 
-const Balloon = ({message, currentUser}: any) => {
-    const sent = currentUser === message.sentBy;
-    const balloonColor = sent ? styles.balloonSent : styles.balloonReceived;
-    const balloonTextColor = sent   
-        ? styles.balloonTextSent
-        : styles.balloonTextReceived;
-    const bubbleWrapper = sent  
-        ? styles.bubbleWrapperSent
-        : styles.bubbleWrapperReceived;
-
+const Balloon = ({ message, currentUser }: any) => {
+    const sentByCurrentUser = currentUser === message.sender;
+    const balloonColor = sentByCurrentUser ? styles.balloonSent : styles.balloonReceived;
+    const balloonTextColor = sentByCurrentUser
+      ? styles.balloonTextSent
+      : styles.balloonTextReceived;
+    const bubbleWrapper = sentByCurrentUser
+      ? styles.bubbleWrapperSent
+      : styles.bubbleWrapperReceived;
+    
     if (message) {
-        return (
-            <View style={{marginBottom: '2%'}}>
-                <View style={{...styles.bubbleWrapper, ...bubbleWrapper}}>
-                    <View style={{...styles.balloon, ...balloonColor}}>
-                        <Text>
-                            {message.sentBy}
-                        </Text>
-                        <Text style={{...styles.balloonText, ...balloonTextColor}}>
-                            {message.content}
-                        </Text>
-                    </View>
-                </View>
+      console.log("Rendering message:", message);
+      return (
+        <View style={{ marginBottom: '2%' }}>
+          <View style={{ ...styles.bubbleWrapper, ...bubbleWrapper }}>
+            <View style={{ ...styles.balloon, ...balloonColor }}>
+              <Text>
+                {message.sender}
+              </Text>
+              <Text style={{ ...styles.balloonText, ...balloonTextColor }}>
+                {message.text}
+              </Text>
             </View>
-        )
+          </View>
+        </View>
+      );
     } else {
-        return <></>
+      console.log("No message to render.");
+      return <></>;
     }
-}
-
-export default Balloon
+  };
+  
+  export default Balloon;

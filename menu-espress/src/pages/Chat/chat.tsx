@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Fragment} from 'react'
 import {ScrollView, SafeAreaView, Text, TextInput, View, TouchableOpacity} from 'react-native'
 import { useState } from 'react'
@@ -7,19 +7,42 @@ import Balloon from './Baloon'
 import styles from './ChatStyle'
 import storageService from '../../storageService'
 
-/*
-    sentBy: 'Tiago Souto'
-    date: '01/12/2023 11:14:20'
-    text: 'Hello World'
-*/
-
 const Chat = () => {
-    const sendMessage = () => {}
-    const options: any = {messages: []}
-    const [text, setText] = useState('')
-    const [chat, setChat] = useState(options)
-    const [userData, setUserData] = useState(options) 
-    storageService.get('userData').then((userData) => setUserData(userData))
+
+    const [text, setText] = useState('');
+    const [chat, setChat] = useState<{ messages: { text: string; sender: string }[] }>({ messages: [] });
+    const [userData, setUserData] = useState({});
+    
+    useEffect(() => {
+      storageService.get('userData').then((userDataString) => {
+        if (userDataString) {
+          const userDataObject = JSON.parse(userDataString);
+          setUserData(userDataObject);
+        }
+      });
+    }, []);
+    
+    const sendMessage = () => {
+      if (text.trim() === '') {
+        return;
+      }
+    
+      const senderName = userData.name || 'Nome Padrão';
+    
+      const newMessage = {
+        text,
+        sender: senderName,
+      };
+    
+      setChat((prevChat) => {
+        return {
+          ...prevChat,
+          messages: [...prevChat.messages, newMessage],
+        };
+      });
+    
+      setText('');
+    };
 
     return (
         <Fragment>

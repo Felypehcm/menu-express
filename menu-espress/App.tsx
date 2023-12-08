@@ -8,18 +8,19 @@ import Favorites from './src/pages/favorites/Favorites';
 import Chat from './src/pages/Chat/chat';
 import Profile from './src/pages/Profile/Profile';
 import Orders from './src/pages/Orders/Orders';
-import  IconTop  from 'react-native-vector-icons/AntDesign';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { useState } from 'react';
 import Toast from 'react-native-toast-message';
 import ProfileIcon from './src/pages/Profile/ProfileIcon';
+import IconTop from './src/pages/Profile/ProfileIcon'
 
 
 const App = (): JSX.Element => {
   const Stack = createNativeStackNavigator()
   const [shoppingCart, setShoppingCart] = useState([])
   const [favorites, setFavorites] = useState([])
+  
   return (
     <>
         <NavigationContainer>
@@ -32,6 +33,7 @@ const App = (): JSX.Element => {
           return {
             title: 'Início',
             headerBackVisible: false,
+            gestureEnabled: false,
               headerTitleAlign: 'center', 
               headerRight: () => <ProfileIcon navigation={navigation} />
             }
