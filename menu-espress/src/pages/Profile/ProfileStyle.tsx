@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    backgroundColor: '#FFA07A',
     alignItems: 'center'
   },
   container2: {
@@ -11,12 +11,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFA07A'
   },
   profileImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    marginTop: 165,
     marginBottom: 10,
   },
   profileImagePlaceholder: {
@@ -33,18 +33,21 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   textView: {
-    marginTop: 40,
+    marginTop: 180,
     alignSelf: 'flex-start',
-    borderRadius: 2,
-    borderColor: '#000000'
+    width: 350
   },
   text: {
     marginTop: 30,
-    fontSize: 18,
-    marginLeft: 5
+    fontSize: 20,
+    marginLeft: 5,
+    borderWidth: 1,
+    borderRadius: 8, 
+    borderColor: '#fb4e30',
+    padding: 8
   },
   buttonContainer: {
-    marginTop: 100,
+    marginTop: 200,
     flexDirection: 'row',
   },
   button: {
@@ -56,7 +59,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 14,
+    textAlign: 'center'
   },
 });
 

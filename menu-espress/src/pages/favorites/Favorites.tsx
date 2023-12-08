@@ -1,36 +1,32 @@
 import React from 'react'
-import { Text, View, Pressable, ScrollView } from 'react-native'
-import { Card } from 'react-native-elements'
+import { Text, View, Pressable, ScrollView, Image } from 'react-native'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
 
 
-const Favorites = ({ favorites, setFavorites, shoppingCart, Home, Orders }: any) => {
+const Favorites = ({ favorites, shoppingCart, Orders }: any) => {
 
   const navigation = useNavigation();
 
-  const remuveFavorite = (product: any) => {
-    const filteredFavorites = favorites.filter((favorite: any) => {
-      return favorite.name !== product.name
-    })
-    setFavorites(filteredFavorites)
-  }
-
   return (
     <>
-    <ScrollView>
-    {favorites.map((prod: any, i: number) => (
-        
-          <Card key={i}>
-            <Card.Title style={{ fontSize: 22 }}> {prod.name} </Card.Title>
-            <Card.Divider />
-            <Card.Image source={{ uri: prod.image }} />
-            <View style={{ alignItems: 'center' }}></View>
-          </Card>
-        
-    ))}
+    <View style={{height: '90%'}}>
+    <ScrollView >
+      {favorites.map((prod: any, i: number) => (
+        <View style={{ flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: '#CCC'}}>
+          <View style={{ width: 120, height: 120 }}>
+            <Image source={{ uri: `data:image/jpeg;base64,${prod.imageUrl}`, width: '100%', height: '100%' }} />
+          </View>
+          <View style={{ margin: 15, width: '65%', height: 120, justifyContent: 'space-between'}}>
+            <Text style={{ fontSize: 20, marginBottom: "3%", fontWeight: 'bold' }}> {prod.name} </Text>
+            <Text style={{ fontSize: 12}}> Descrição: {prod.description} </Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingRight: 10 }}>
+            </View>
+          </View>
+        </View>
+      ))}
     </ScrollView>
+    </View>
     
     <View style={{position:'absolute', bottom: 0}}>
       <View style={{flexDirection:'row', borderRadius: 50, justifyContent: 'space-between', marginHorizontal: 50, marginVertical: 20}}>

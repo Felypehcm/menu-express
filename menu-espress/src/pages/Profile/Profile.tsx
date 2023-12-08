@@ -83,10 +83,10 @@ const Profile = ({ navigation }: any) => {
       <View style={styles.container2}>
         <View style={styles.profileImagePlaceholder}>
           <Image style={styles.profileImage} source={{ uri: userProfileImage }} />
-        </View>
-        <Pressable onPress={openImagePicker} style={styles.button}>
+          <Pressable onPress={openImagePicker} style={styles.button}>
             <Text style={styles.buttonText}>Alterar Foto</Text>
         </Pressable>
+        </View>
         <View style={styles.textView}>
           <Text style={styles.text}>Nome: {userName}</Text>
           <Text style={styles.text}>Email: {userEmail}</Text>
@@ -95,7 +95,6 @@ const Profile = ({ navigation }: any) => {
           <Pressable onPress={changePassword} style={styles.button}>
             <Text style={styles.buttonText}>Mudar Senha</Text>
           </Pressable>
-
           <Pressable onPress={logout} style={styles.button}>
             <Text style={styles.buttonText}>Sair do Aplicativo</Text>
           </Pressable>

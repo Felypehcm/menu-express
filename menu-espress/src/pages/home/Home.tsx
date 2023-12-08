@@ -12,6 +12,18 @@ const Home = ({ navigation, shoppingCart, setShoppingCart, favorites, setFavorit
 
   const [ lanchesHome, setLanchesHome ] = useState([]);
   const [ favorite, setFavorite ] = useState(false);
+
+  const toggleFavorite = (product: any) => {
+    const isFavorited = favorites.some((favItem: any) => favItem._id === product._id);
+
+    if (isFavorited) {
+      const filteredFavorites = favorites.filter((favItem: any) => favItem._id !== product._id);
+      setFavorites(filteredFavorites);
+    } else {
+      setFavorites([...favorites, product]);
+      ({ favorites: [...favorites, product] });
+    }
+  };  
   
   const openToast = (message: string) => {
     Toast.show({
@@ -76,19 +88,13 @@ const Home = ({ navigation, shoppingCart, setShoppingCart, favorites, setFavorit
               }}style={({ pressed }: any) => ({backgroundColor: pressed ? '#2089dc' : '#fb4e30', height: 32, justifyContent: 'center', alignItems: 'center', borderRadius: 8, paddingHorizontal: 10})}>
               <Text style={{ fontSize: 14, color: 'white' }}>Adicionar</Text>
             </Pressable> */}
-            {/* {
-              favorite ?
-              <Icon onPress={() => { removeFavorite(item), setFavorite(false) }} name="heart" size={28} color="red"></Icon> :
-              <Icon onPress={() => {
-                if (favorites) {
-                  setFavorites([...favorites, item])
-                } else {
-                  setFavorites([item])
-                }
-                setFavorite(true)
-              }} name="hearto" size={28}></Icon>
-            } */}
-            <Icon name="hearto" size={28}></Icon>
+            
+            <Icon
+                name={favorites.some((favItem: any) => favItem._id === item._id) ? "heart" : "hearto"}
+                size={28}
+                onPress={() => toggleFavorite(item)}
+                color={favorites.some((favItem: any) => favItem._id === item._id) ? "red" : "black"}
+            />
           </View>
         </View>
       </View>
