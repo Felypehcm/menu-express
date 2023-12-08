@@ -1,15 +1,19 @@
-import { StatusBar } from 'expo-status-bar'
 import { useEffect, useState } from 'react'
 import React from 'react'
+<<<<<<< HEAD
 import { Pressable, ScrollView, Text, View } from 'react-native'
 import { Button, Card } from 'react-native-elements'
 import {FAB} from '@rneui/themed';
+=======
+import { FlatList, Pressable, Text, View, Image } from 'react-native'
+import httpService from '../../httpService'
+import { FAB } from 'react-native-elements';
+>>>>>>> d45801dcc250d0611fc2e7d4f6fe54f319f21467
 import Icon from 'react-native-vector-icons/AntDesign'
-import Style from './HomeStyle'
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from 'react-native-toast-message';
 import httpService from '../../httpService'
 
+<<<<<<< HEAD
 const productsSanduiches = [
   {name: "X Bacon", price: 32.30 , quantity: 0, description: "X Bacon", image: "https://embutidosbonatti.ind.br/temp/BIN_57_V9Fb0BwK.jpg"},
   {name: "X Salad", price: 28, quantity: 0, description: "X Salad", image: "https://d1etmlapode6io.cloudfront.net/images/fidelizze/demofood/items/rsz_ilya-mashkov-mkva2hljgni-unsplash_637260269992723902.jpg"},
@@ -45,22 +49,34 @@ const productsBebidas = [
 ]
 
 const Home = ({navigation, shoppingCart, setShoppingCart, favorites, setFavorites, orders}: any) => {
+=======
+import Style from './HomeStyle';
+
+const Home = ({ navigation, shoppingCart, setShoppingCart, favorites, setFavorites, orders } : any) => {
+
+  const [ lanchesHome, setLanchesHome ] = useState([]);
+  const [ favorite, setFavorite ] = useState(false);
+  
+>>>>>>> d45801dcc250d0611fc2e7d4f6fe54f319f21467
   const openToast = (message: string) => {
     Toast.show({
       type: 'success',
       text1: message
     });
-  }
-  const remuveFavorite = (product: any) => {
+  };
+
+  const openChat = () => {
+    navigation.navigate('Chat')
+  };
+
+  const removeFavorite = (product: any) => {
     const filteredFavorites = favorites.filter((favorite: any) => {
       return favorite.name !== product.name
     })
-    setFavorites(filteredFavorites)
-  }
-  const openChat = () => {
-    navigation.navigate('Chat')
-  }
+    setFavorites(filteredFavorites);
+  };
 
+<<<<<<< HEAD
 
   return (
     <>
@@ -315,8 +331,104 @@ const Home = ({navigation, shoppingCart, setShoppingCart, favorites, setFavorite
                         alignItems: 'center',
                         borderRadius: 50}}><Icon name="profile" size={30} color="white"/></Pressable>
     </View>
+=======
+  const lanches = async () => {
+    try {
+      const result: any = await httpService.getLancheHome();
+      const data: any = await result.json();
+      setLanchesHome(data);
+      return data;
+    } catch (error) {
+      console.log('Não foi possível exibir os itens ={', error);
+    }
+  };
+
+  useEffect(() => {
+    const lanchesHomeTry: any = lanches();
+    if (lanchesHomeTry.length) {
+      setLanchesHome(lanchesHomeTry);
+    };
+
+  }, []);
+    const renderItem = ({ item } : any) => (
+      <>
+        <View style={{ flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: '#CCC'}}>
+          <View style={{ width: 120, height: 120 }}>
+            <Image source={{ uri: `data:image/jpeg;base64,${item.imageUrl}`, width: '100%', height: '100%' }} />
+          </View>
+          <View style={{ margin: 15, width: '65%', height: 120, justifyContent: 'space-between'}}>
+            <Text style={{ fontSize: 20, marginBottom: "3%", fontWeight: 'bold' }}> {item.name} </Text>
+            <Text style={{ fontSize: 12}}> Descrição: {item.description} </Text>
+            <Text style={{ fontSize: 16, marginEnd: "5%", marginBottom: "3%", marginTop: "2%" }}> Preço: R$ {item.price.toFixed(2)} </Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingRight: 10 }}>
+              {/* <Pressable onPress={() => {
+                openToast("Item adicionado com sucesso!");
+                item.quantity += 1;
+                const existingProduct = shoppingCart.find((item: any) => item.name === item.name);
+                const emptyProduct = shoppingCart.find((item: any) => item.quantity <= 0);
+                if (!existingProduct && !emptyProduct) {
+                  setShoppingCart([...shoppingCart, item])
+                };
+                if (emptyProduct) {
+                  const notEmptyProducts = shoppingCart.filter((item: any) => item.quantity > 0);
+                  setShoppingCart(notEmptyProducts)
+                };
+                }}style={({ pressed }: any) => ({backgroundColor: pressed ? '#2089dc' : '#fb4e30', height: 32, justifyContent: 'center', alignItems: 'center', borderRadius: 8, paddingHorizontal: 10})}>
+                <Text style={{ fontSize: 14, color: 'white' }}>Adicionar</Text>
+              </Pressable> */}
+          {/* {
+            favorite ?
+            <Icon onPress={() => { removeFavorite(item), setFavorite(false) }} name="heart" size={28} color="red"></Icon> :
+            <Icon onPress={() => {
+              if (favorites) {
+                setFavorites([...favorites, item])
+              } else {
+                setFavorites([item])
+              }
+              setFavorite(true)
+            }} name="hearto" size={28}></Icon>
+          } */}
+              <Icon name="hearto" size={28}></Icon>
+            </View>
+          </View>
+        </View>
+      </>
+  );
+
+  return (
+    <>
+      <View style={{height: '90%'}}>
+        <FlatList
+          data={lanchesHome}
+          renderItem={renderItem}
+          keyExtractor={(item: any) => item._id}
+        />
+      </View>
+
+      <FAB style={Style.fab} visible={true} icon={{ name: 'chat', color: 'white' }} color="green" onPress={() => openChat()} />
+
+      <View style={{position:'absolute', bottom: 0}}>
+        <View style={{flexDirection:'row', borderRadius: 50, justifyContent: 'space-between', marginHorizontal: 10, marginVertical: 20}}>
+          <Pressable style={{ backgroundColor: '#fb4e30', height: 50, width: 50, marginHorizontal:14, justifyContent: 'center', alignItems: 'center', borderRadius: 50 }}>
+            <Icon name="home" size={30} color="white"></Icon>
+          </Pressable>
+
+          <Pressable onPress={() => (navigation.navigate('ShoppingCart', { shoppingCart }))} style={{ backgroundColor: '#fb4e30', height: 50, width: 50, marginHorizontal:14, justifyContent: 'center', alignItems: 'center', borderRadius: 50 }}>
+            <Icon name="shoppingcart" size={30} color="white"></Icon>
+          </Pressable>
+
+          <Pressable onPress={() => (navigation.navigate('Favorites', { favorites }))} style={{ backgroundColor: '#fb4e30', height: 50, width: 50, marginHorizontal:14, justifyContent: 'center', alignItems: 'center', borderRadius: 50 }}>
+            <Icon name="heart" size={30} color="white"></Icon>
+          </Pressable>
+
+          <Pressable onPress={() => (navigation.navigate('Orders', { orders }))} style={{ backgroundColor: '#fb4e30', height: 50, width: 50, marginHorizontal:14, justifyContent: 'center', alignItems: 'center', borderRadius: 50 }}>
+            <Icon name="profile" size={30} color="white" />
+          </Pressable>
+        </View>
+      </View>
+>>>>>>> d45801dcc250d0611fc2e7d4f6fe54f319f21467
     </>
   );
-}
+};
 
 export default Home
