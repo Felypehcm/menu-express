@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-const BASE_URL = 'http://192.168.1.3:8080/api';
-=======
 const BASE_URL = 'http://192.168.0.13:8080/api';
->>>>>>> d45801dcc250d0611fc2e7d4f6fe54f319f21467
 
 const httpService = {
   
@@ -104,46 +100,7 @@ const httpService = {
         return {};
     }
   },
-  
-<<<<<<< HEAD
-  // getLancheHome: async (productType: string) => {
-  //   try {
-  //     const response = await fetch(`${BASE_URL}/product/findByType/:typeProduct`, {
-  //       method: 'GET',
-  //       headers: {
-  //         Accept: 'application/json',
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify({productType}),
-  //     });
-  //     return response;
-  //   } catch (error) {
-  //     console.error('Erro ao exibir os lanches:', error);
-  //     throw error;
-  //   };
-  // },
 
-  getProductsFromDatabase: async () => {
-    try {
-      const response = await fetch(`${BASE_URL}/product/findAll`, {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        }
-      });
-      console.log(response)
-      if (response.ok) {
-        const data = await response.json();
-        return data;
-      } else {
-        console.error('Erro ao obter produtos do banco de dados:', response.status, response.statusText);
-        return [];
-      }
-    } catch (error) {
-      console.error('Erro ao obter produtos do banco de dados:', error);
-      return [];
-=======
   getLancheHome: async () => {
     try {
         return await fetch(`${BASE_URL}/product/findAll`, {
@@ -155,7 +112,6 @@ const httpService = {
         });
     } catch (error) {
         console.error('Erro na busca por produto', error);
->>>>>>> d45801dcc250d0611fc2e7d4f6fe54f319f21467
     }
   }
 };
