@@ -1,4 +1,4 @@
-const BASE_URL = 'http://192.168.1.145:8080/api';
+const BASE_URL = 'http://192.168.0.2:8080/api';
 
 const httpService = {
   
@@ -112,6 +112,21 @@ const httpService = {
         });
     } catch (error) {
         console.error('Erro na busca por produto', error);
+    }
+  },
+
+  addOrder: async (email: string, order: any[]) => {
+    try {
+        return await fetch(`${BASE_URL}/order`, {
+            method: 'PUT',
+            headers: { 
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, order }),
+        });
+    } catch (error) {
+        console.error('Erro na busca por pedidos', error);
     }
   }
 };

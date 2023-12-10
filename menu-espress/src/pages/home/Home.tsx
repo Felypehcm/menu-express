@@ -73,21 +73,21 @@ const Home = ({ navigation, shoppingCart, setShoppingCart, favorites, setFavorit
           <Text style={{ fontSize: 12}}> Descrição: {item.description} </Text>
           <Text style={{ fontSize: 16, marginEnd: "5%", marginBottom: "3%", marginTop: "2%" }}> Preço: R$ {item.price.toFixed(2)} </Text>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingRight: 10 }}>
-            {/* <Pressable onPress={() => {
+            <Pressable onPress={() => {
               openToast("Item adicionado com sucesso!");
-              item.quantity += 1;
+              item.descount += 1;
               const existingProduct = shoppingCart.find((item: any) => item.name === item.name);
-              const emptyProduct = shoppingCart.find((item: any) => item.quantity <= 0);
-              if (!existingProduct && !emptyProduct) {
+              const emptyProduct = shoppingCart.find((item: any) => item.descount <= 0);
+              if (!emptyProduct) {
                 setShoppingCart([...shoppingCart, item])
               };
               if (emptyProduct) {
-                const notEmptyProducts = shoppingCart.filter((item: any) => item.quantity > 0);
+                const notEmptyProducts = shoppingCart.filter((item: any) => item.descount > 0);
                 setShoppingCart(notEmptyProducts)
               };
               }}style={({ pressed }: any) => ({backgroundColor: pressed ? '#2089dc' : '#fb4e30', height: 32, justifyContent: 'center', alignItems: 'center', borderRadius: 8, paddingHorizontal: 10})}>
               <Text style={{ fontSize: 14, color: 'white' }}>Adicionar</Text>
-            </Pressable> */}
+            </Pressable>
             
             <Icon
                 name={favorites.some((favItem: any) => favItem._id === item._id) ? "heart" : "hearto"}
