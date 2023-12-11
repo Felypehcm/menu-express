@@ -81,15 +81,11 @@ const ShoppingCart = ({route}: any) => {
         finalPrice: cartItems.reduce((total, item) => total + item.price * item.descount, 0),
       };
 
-
       const result = await httpService.addOrder(userEmail || '' , newOrder);
       const data = await result!.json();
-      console.log("aqui1");
-      console.log(result?.status);
 
       if (result!.status === 200) {
         try {
-          console.log("aqui2");
           storageService.set('userData', JSON.stringify(data));
           goTopage('Orders');
           Toast.show({
@@ -103,11 +99,8 @@ const ShoppingCart = ({route}: any) => {
           });
         }  
       }
-      
-
 
       const updatedOrders = [...orders, newOrder];
-
 
       setOrders(updatedOrders);
     };

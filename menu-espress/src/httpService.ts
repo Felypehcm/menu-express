@@ -1,7 +1,7 @@
-const BASE_URL = 'http://192.168.0.2:8080/api';
+const BASE_URL = 'http://192.168.1.8:8080/api';
 
 const httpService = {
-  
+
   login: async (email: string, password: string) => {
     try {
       const response = await fetch(`${BASE_URL}/auth/login`, {
@@ -55,78 +55,81 @@ const httpService = {
 
   saveImageToDatabase: async (email: string, uri: string) => {
     try {
-        const formData = new FormData();
+      const formData = new FormData();
 
-        const file = {
-            uri,
-            type: 'image/jpeg', 
-            name: 'avatar.jpg',
-        };
-        formData.append('avatar', file);
-        formData.append('email', email);
+      const file = {
+        uri,
+        type: 'image/jpeg',
+        name: 'avatar.jpg',
+      };
+      formData.append('avatar', file);
+      formData.append('email', email);
 
-        const saveResponse = await fetch(`${BASE_URL}/user/uploadAvatar`, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        });
+      const saveResponse = await fetch(`${BASE_URL}/user/uploadAvatar`, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
-        const data = await saveResponse.json();
-        console.log('Imagem salva no banco de dados:', data);
+      const data = await saveResponse.json();
+      console.log('Imagem salva no banco de dados:', data);
     } catch (error) {
-        console.error('Erro ao salvar imagem no banco de dados:', error);
+      console.error('Erro ao salvar imagem no banco de dados:', error);
     }
   },
 
   searchByEmail: async (email: string) => {
     try {
-        const response = await fetch(`${BASE_URL}/user/findByEmail/${encodeURIComponent(email)}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+      const response = await fetch(`${BASE_URL}/user/findByEmail/${encodeURIComponent(email)}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-        if (response.ok) {
-            const data = await response.json();
-            return data;
-        }
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      }
 
-        return {};
+      return {};
     } catch (error) {
-        console.error('Erro na busca por email:', error);
-        return {};
+      console.error('Erro na busca por email:', error);
+      return {};
     }
   },
 
   getLancheHome: async () => {
     try {
-        return await fetch(`${BASE_URL}/product/findAll`, {
-            method: 'GET',
-            headers: { 
-              'Content-Type': 'application/json; charset=utf-8',
-            },
-            // body: JSON.stringify({productType: 'Lanche'})
-        });
+      return await fetch(`${BASE_URL}/product/findAll`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+        },
+        // body: JSON.stringify({productType: 'Lanche'})
+      });
     } catch (error) {
-        console.error('Erro na busca por produto', error);
+      console.error('Erro na busca por produto', error);
     }
   },
 
-  addOrder: async (email: string, order: any[]) => {
+  addOrder: async (email: string, order: any) => {
     try {
-        return await fetch(`${BASE_URL}/order`, {
-            method: 'PUT',
-            headers: { 
-              Accept: 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, order }),
-        });
+      const response = await fetch(`${BASE_URL}/user/order`, {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, order }),
+      });
+
+      return response;
     } catch (error) {
-        console.error('Erro na busca por pedidos', error);
+      console.error('Erro na busca por pedidos', error);
+      throw error; // Re-throw para que o chamador saiba que houve um erro
     }
   }
 };
