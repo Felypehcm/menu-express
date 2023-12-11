@@ -72,15 +72,19 @@ const Home = ({ navigation, shoppingCart, setShoppingCart, favorites, setFavorit
           <Text style={{ fontSize: 20, marginBottom: "3%", fontWeight: 'bold' }}> {item.name} </Text>
           <Text style={{ fontSize: 12}}> Descrição: {item.description} </Text>
           <Text style={{ fontSize: 16, marginEnd: "5%", marginBottom: "3%", marginTop: "2%" }}> Preço: R$ {item.price.toFixed(2)} </Text>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingRight: 10 }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingRight: 20 }}>
             <Pressable onPress={() => {
               openToast("Item adicionado com sucesso!");
               item.descount += 1;
-              const existingProduct = shoppingCart.find((item: any) => item.name === item.name);
+              const existingProductIndex = shoppingCart.findIndex((cartItem: any) => cartItem._id === item._id);
+              const updatedCart = [...shoppingCart];
               const emptyProduct = shoppingCart.find((item: any) => item.descount <= 0);
-              if (!emptyProduct) {
-                setShoppingCart([...shoppingCart, item])
-              };
+              if (existingProductIndex !== -1) {
+                updatedCart[existingProductIndex].descount += 1;
+              } else {
+                updatedCart.push({ ...item, descount: 1 });
+              }
+              setShoppingCart(updatedCart);
               if (emptyProduct) {
                 const notEmptyProducts = shoppingCart.filter((item: any) => item.descount > 0);
                 setShoppingCart(notEmptyProducts)
@@ -115,19 +119,19 @@ const Home = ({ navigation, shoppingCart, setShoppingCart, favorites, setFavorit
 
       <View style={{position:'absolute', bottom: 0}}>
         <View style={{flexDirection:'row', borderRadius: 50, justifyContent: 'space-between', marginHorizontal: 10, marginVertical: 20}}>
-          <Pressable style={{ backgroundColor: '#fb4e30', height: 50, width: 50, marginHorizontal:14, justifyContent: 'center', alignItems: 'center', borderRadius: 50 }}>
+          <Pressable style={{ backgroundColor: '#fb4e30', height: 50, width: 50, marginHorizontal:12, justifyContent: 'center', alignItems: 'center', borderRadius: 50 }}>
             <Icon name="home" size={30} color="white"></Icon>
           </Pressable>
 
-          <Pressable onPress={() => (navigation.navigate('ShoppingCart', { shoppingCart }))} style={{ backgroundColor: '#fb4e30', height: 50, width: 50, marginHorizontal:14, justifyContent: 'center', alignItems: 'center', borderRadius: 50 }}>
+          <Pressable onPress={() => (navigation.navigate('ShoppingCart', { shoppingCart }))} style={{ backgroundColor: '#fb4e30', height: 50, width: 50, marginHorizontal:12, justifyContent: 'center', alignItems: 'center', borderRadius: 50 }}>
             <Icon name="shoppingcart" size={30} color="white"></Icon>
           </Pressable>
 
-          <Pressable onPress={() => (navigation.navigate('Favorites', { favorites }))} style={{ backgroundColor: '#fb4e30', height: 50, width: 50, marginHorizontal:14, justifyContent: 'center', alignItems: 'center', borderRadius: 50 }}>
+          <Pressable onPress={() => (navigation.navigate('Favorites', { favorites }))} style={{ backgroundColor: '#fb4e30', height: 50, width: 50, marginHorizontal:12, justifyContent: 'center', alignItems: 'center', borderRadius: 50 }}>
             <Icon name="heart" size={30} color="white"></Icon>
           </Pressable>
 
-          <Pressable onPress={() => (navigation.navigate('Orders', { orders }))} style={{ backgroundColor: '#fb4e30', height: 50, width: 50, marginHorizontal:14, justifyContent: 'center', alignItems: 'center', borderRadius: 50 }}>
+          <Pressable onPress={() => (navigation.navigate('Orders', { orders }))} style={{ backgroundColor: '#fb4e30', height: 50, width: 50, marginHorizontal:12, justifyContent: 'center', alignItems: 'center', borderRadius: 50 }}>
             <Icon name="profile" size={30} color="white" />
           </Pressable>
         </View>
