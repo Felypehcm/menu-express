@@ -1,6 +1,5 @@
 import { useState, useEffect }from "react";
 import { Text, ScrollView, Pressable, View, Image } from "react-native"
-import { Card } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import httpService from "../../httpService";

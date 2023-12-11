@@ -26,18 +26,10 @@ const styles = StyleSheet.create({
       marginTop: 10,
       fontSize: 18,
       fontWeight: 'bold',
-    },
-    totalPriceBottomContainer: {
-        bottom: 0,
-        left: 0,
-        right: 0,
-    },
-    totalPriceBottom: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        backgroundColor: '#fff'
-    },
+      textAlign: 'center',
+      backgroundColor: '#fb4e30',
+      color: 'white'
+    }
   });
 
   export default styles;

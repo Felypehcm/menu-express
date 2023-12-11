@@ -39,8 +39,6 @@ const Orders = ({favorites, shoppingCart} : any) => {
       });
   }
 
-  const totalValue: number = orders.reduce((total: number, order: any) => total + (order.finalPrice || 0), 0);
-
     return (
       <>
         <View style={{height: '90%'}}>
@@ -48,12 +46,12 @@ const Orders = ({favorites, shoppingCart} : any) => {
             <Text style={styles.heading}>Seu(s) Pedido(s):</Text>
             {orders.map((order: any, index: number) => (
               <View key={index} style={styles.orderCard}>
-                <Text style={styles.cardTitle}>Pedido {index + 1}</Text>
+                <Text style={styles.cardTitle}>Pedido {index + 1}:</Text>
                 {order.products.map((product: any, productIndex: number) => (
                 <View key={productIndex} style={styles.productInfo}>
                   <Text>Produto: {product.name}</Text>
-                  <Text>Quantidade: {product.quantity}</Text>
-                  <Text>Preço: R${(product.price * product.quantity).toFixed(2)}</Text>
+                  <Text>Quantidade: {product.descount}</Text>
+                  <Text>Preço: R${((product.price) * product.descount).toFixed(2)}</Text>
                 </View>
                 ))}
                 <Text style={styles.totalPrice}>
@@ -62,9 +60,6 @@ const Orders = ({favorites, shoppingCart} : any) => {
               </View>
             ))}
             <View style={styles.totalPriceBottomContainer}>
-              <Text style={styles.totalPriceBottom}>
-                Valor Final: R${totalValue.toFixed(2)}
-              </Text>
             </View>
           </ScrollView>
         </View>
