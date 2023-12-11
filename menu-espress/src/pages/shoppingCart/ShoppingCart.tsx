@@ -1,5 +1,5 @@
 import { useState, useEffect }from "react";
-import { Text, ScrollView, Pressable, View } from "react-native"
+import { Text, ScrollView, Pressable, View, Image } from "react-native"
 import { Card } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
@@ -116,15 +116,32 @@ const ShoppingCart = ({route}: any) => {
       <>
         <ScrollView style={{ marginBottom: 80 }}>
       {cartItems.map((prod: any, i: number) => (
-        <Card key={i}>
-          <Card.Title style={{ fontSize: 22 }}> {prod.name} </Card.Title>
+        
+        <View>
+          <View style={{ flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: '#CCC'}}>
+            <View style={{ width: 120, height: 120 }}>
+              <Image source={{ uri: `data:image/jpeg;base64,${prod.imageUrl}`, width: '100%', height: '100%' }} />
+            </View>
+            <View style={{ margin: 15, width: '65%', height: 120, justifyContent: 'space-between'}}>
+              <Text style={{ fontSize: 20, marginBottom: "3%", fontWeight: 'bold' }}> {prod.name} </Text>
+              <Text style={{ fontSize: 12}}> Descrição: {prod.description} </Text>
+              <Text style={{ fontSize: 16, marginEnd: "5%", marginBottom: "3%", marginTop: "2%" }}> Preço: R$ {prod.price.toFixed(2)} </Text>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingRight: 10 }}>
+              </View>
+            </View>
+          </View>
+
+
+          {/* <Card.Title style={{ fontSize: 22 }}> {prod.name} </Card.Title>
           <Card.Divider />
           <Card.Image source={{ uri: `data:image/jpeg;base64,${prod.imageUrl}` }} />
           <View style={{ alignItems: 'center' }}>
             <Text style={{ fontSize: 16, margin: 8 }}>
               Preço: {prod.price * prod.descount}
             </Text>
-          </View>
+          </View> */}
+
+
           <View
             style={{
               flexDirection: 'row',
@@ -165,7 +182,7 @@ const ShoppingCart = ({route}: any) => {
               <Text style={{ fontSize: 24, color: 'white' }}>+</Text>
             </Pressable>
           </View>
-        </Card>
+        </View>
       ))}
     </ScrollView>
     
