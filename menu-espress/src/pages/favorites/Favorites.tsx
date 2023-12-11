@@ -4,9 +4,21 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native';
 
 
-const Favorites = ({ favorites, shoppingCart, Orders }: any) => {
+const Favorites = ({ favorites, shoppingCart, Orders, setFavorites, setShoppingCart }: any) => {
 
   const navigation = useNavigation();
+
+  const toggleFavorite = (product: any) => {
+    const isFavorited = favorites.some((favItem: any) => favItem._id === product._id);
+
+    if (isFavorited) {
+      const filteredFavorites = favorites.filter((favItem: any) => favItem._id !== product._id);
+      setFavorites(filteredFavorites);
+    } else {
+      setFavorites([...favorites, product]);
+      ({ favorites: [...favorites, product] });
+    }
+  }; 
 
   return (
     <>
@@ -22,7 +34,36 @@ const Favorites = ({ favorites, shoppingCart, Orders }: any) => {
             <Text style={{ fontSize: 12}}> Descrição: {prod.description} </Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingRight: 10 }}>
             </View>
-          </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingRight: 20 }}>
+              <Pressable onPress={() => {
+                    prod.descount += 1;
+                    const existingProductIndex = shoppingCart.findIndex((cartItem: any) => cartItem._id === prod._id);
+                    const updatedCart = [...shoppingCart];
+                    const emptyProduct = shoppingCart.find((prod: any) => prod.descount <= 0);
+                    if (existingProductIndex !== -1) {
+                      updatedCart[existingProductIndex].descount += 1;
+                    } else {
+                      updatedCart.push({ ...prod, descount: 1 });
+                    }
+                    setShoppingCart(updatedCart);
+                    if (emptyProduct) {
+                      const notEmptyProducts = shoppingCart.filter((item: any) => item.descount > 0);
+                      setShoppingCart(notEmptyProducts)
+                    };
+                    }}style={({ pressed }: any) => ({backgroundColor: pressed ? '#2089dc' : '#fb4e30', height: 32, justifyContent: 'center', alignItems: 'center', borderRadius: 8, paddingHorizontal: 10})}>
+                    <Text style={{ fontSize: 14, color: 'white' }}>Adicionar</Text>
+                  </Pressable>
+                  
+                  <Icon
+                      name={favorites.some((favItem: any) => favItem._id === prod._id) ? "heart" : "hearto"}
+                      size={28}
+                      onPress={() => toggleFavorite(prod)}
+                      color={favorites.some((favItem: any) => favItem._id === prod._id) ? "red" : "black"}
+                  />
+
+            </View>
+
+            </View>
         </View>
       ))}
     </ScrollView>
