@@ -46,7 +46,7 @@ const App = (): JSX.Element => {
             )
           }
         </Stack.Screen>
-        <Stack.Screen name="Orders" options={{title: 'Orders'}}>
+        <Stack.Screen name="Orders" options={{title: 'Pedidos'}}>
         {
             () => (<Orders shoppingCart={shoppingCart} favorites={favorites}></Orders>)
         }

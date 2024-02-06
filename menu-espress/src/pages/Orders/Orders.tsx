@@ -43,7 +43,6 @@ const Orders = ({favorites, shoppingCart} : any) => {
       <>
         <View style={{height: '90%'}}>
           <ScrollView style={{ marginBottom: 80 }}>
-            <Text style={styles.heading}>Seu(s) Pedido(s):</Text>
             {orders.map((order: any, index: number) => (
               <View key={index} style={styles.orderCard}>
                 <Text style={styles.cardTitle}>Pedido {index + 1}:</Text>

@@ -91,6 +91,8 @@ const ShoppingCart = ({route}: any) => {
             type: 'success',
             text1: data.message
           });
+          // ACREDITO QUE AQUI DEVEMOS ENTRAR COM A REDUÇÃO DA QUANTIDADE DISPONÍVEL EM ESTOQUE DE ACORDO COM O QUE FOI COMPRADO
+          // ACREDITO QUE AQUI DEVEMOS ZERAR O CARRINHO, APÓS A CONFIRMAÇÃO DA COMPRA
         } catch (e) {
           Toast.show({
             type: 'error',
@@ -141,7 +143,7 @@ const ShoppingCart = ({route}: any) => {
                 borderRadius: 6,
                 marginBottom: 8,
               })}
-            >
+              >
               <Text style={{ fontSize: 24, color: 'white' }}>-</Text>
             </Pressable>
             <Text style={{ fontSize: 32, color: 'black', marginBottom: 8 }}>
@@ -158,7 +160,7 @@ const ShoppingCart = ({route}: any) => {
                 alignItems: 'center',
                 borderRadius: 6,
               })}
-            >
+              >
               <Text style={{ fontSize: 24, color: 'white' }}>+</Text>
             </Pressable>
           </View>

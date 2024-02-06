@@ -50,7 +50,7 @@ const Home = ({ navigation, shoppingCart, setShoppingCart, favorites, setFavorit
       setLanchesHome(data);
       return data;
     } catch (error) {
-      console.log('Não foi possível exibir os itens ={', error);
+      console.log('Não foi possível exibir os itens', error);
     }
   };
 
@@ -62,7 +62,7 @@ const Home = ({ navigation, shoppingCart, setShoppingCart, favorites, setFavorit
 
   }, []);
 
-  const renderItem = ({ item } : any) => (
+  const renderItem = ({ item } : any) => item.showInApp ? (
     <>
       <View style={{ flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: '#CCC'}}>
         <View style={{ width: 120, height: 120 }}>
@@ -103,7 +103,7 @@ const Home = ({ navigation, shoppingCart, setShoppingCart, favorites, setFavorit
         </View>
       </View>
     </>
-  );
+  ) : null;
 
   return (
     <>
